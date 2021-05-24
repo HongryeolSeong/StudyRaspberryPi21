@@ -13,3 +13,6 @@ Raspberry Pi Stucdy Repository
 
 [test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0521/gpio_test3.py "3")
 <br>
+
+[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0521/gpio_test3.py "3")
+<br>
