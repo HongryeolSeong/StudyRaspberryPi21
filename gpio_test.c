@@ -4,7 +4,7 @@
 
 void main()
 {
-	printf("단디 좀 하자!");
+	printf("단디 좀 하자!\n");
 	wiringPiSetupGpio();
 	pinMode(LED, OUTPUT);
 
