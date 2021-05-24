@@ -11,8 +11,8 @@ void main()
 	while(1)
 	{
 		digitalWrite(LED, HIGH);
-		delay(500);
+		delay(500); // 0.5초 딜레이
 		digitalWrite(LED, LOW);
-		delay(500);
+		delay(500); // 0.5초 딜레이
 	}
 }
