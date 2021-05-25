@@ -54,7 +54,7 @@ Both : 변화기간의 중간
 [test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/int.py "7")
 <br>
 
-인터럽트를 활용한 내부 풀 다운 스위치로 LED 점멸하기
+인터럽트를 활용한 내부 풀 다운 스위치로 LED 점멸하기   
 [test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/int_led.py "8")
 <br>
 <br>
@@ -69,6 +69,6 @@ Both : 변화기간의 중간
 [test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/int.py "7")
 <br>
 
-인터럽트를 활용한 내부 풀 다운 스위치로 LED 점멸하기
+인터럽트를 활용한 내부 풀 다운 스위치로 LED 점멸하기   
 [test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/int_led.py "8")
 <br>
