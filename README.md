@@ -69,18 +69,18 @@ PWM 기본
 [test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/pwm1.py "9")
 <br>
 
-PWM 활용 LED의 느린 점멸
+PWM 활용 LED의 느린 점멸   
 [test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/pwm_led.py "10")
 <br>
 
-PWM 활용 스피커를 통한 멜로디 출력
+PWM 활용 스피커를 통한 멜로디 출력   
 [test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/melody.py "11")
 <br>
 
-PWM 활용 키보드 피아노.ver1(입력후 엔터)
+PWM 활용 키보드 피아노.ver1(입력후 엔터)   
 [test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/piano.py "12")
 <br>
 
-PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)
+PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)   
 [test_code_5](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/piano2.py "13")
 <br>
