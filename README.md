@@ -65,8 +65,8 @@ Both : 변화기간의 중간
 * 입력을 주는 시간(duty)에 따라 전체 입력량 조절   
 <br>
 
-인터럽트를 활용한 내부 풀 다운 스위치   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/int.py "7")
+PWM 기본 
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0525/pwm1.py "9")
 <br>
 
 인터럽트를 활용한 내부 풀 다운 스위치로 LED 점멸하기   
