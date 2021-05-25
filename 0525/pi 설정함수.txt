@@ -1,0 +1,23 @@
+@ 기본적으로 다음 함수들은 작성을 하여 초기화 시켜야 한다.
+*C
+int wiringPiSetup(void)					// wpi모드
+int wiringPiSetupGpio(void)				// BCM모드
+void pinMode(int pin, int mode)			// mode : INPUT/OUTPUT
+int digitalRead(int pin)				// 입력함수
+void digitalWrite(int pin, int value)	// 출력함수
+===============================================================
+*Python
+GPIO.setmode(GPIO.BOARD)	// wpi모드
+GPIO.setmode(GPIO.BCM)		// BCM모드
+GPIO.setup(pin, GPIO.mode)	// mode : IN/OUTPUT
+GPIO.input(pin)
+GPIO.output(pin, state)		// state : HIGH/LOW or 1/0 or True/False
+
+~interrupt
+GPIO.add_event_callback(channel, function) // channel : pin, function : interrupt 발생 시 호출할 함수
+~PWM
+p = GPIO.PWM(channel, freq)
+p.start(duty)
+p.ChangeFrequency(freq)
+p.ChangeDuty(duty)
+p.stop()
