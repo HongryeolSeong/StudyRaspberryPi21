@@ -1,0 +1,560 @@
+~파이선 업데이트
+>>> python -V
+>>> which python
+>>> ls /usr/bin/python
+>>> ls -l /usr/bin/python
+>>> whereis python
+>>> python
+>>> a = 100
+>>> a
+>>> 출력 : 100
+>>> exit()
+>>> sudo ln -f /usr/bin/python3.7 /usr/bin/python
+-> 버전 바뀜
+
+~vnc에서 파이선 작업
+개발->Thoony Python IDE
+
+~파이선 폴더 만들기
+>>> cd Work
+>>> mkdir Pysrc
+
+~파이선 코딩
+>>> cd Pysrc
+>>> nano hello.py
+코딩후
+>>> python hello.py : 파이선 실행
+
+~정수
+>>> a = 10
+>>> a
+10
+>>> print(a)
+10
+
+~문자
+>>> c = 'a'
+>>> c
+'a'
+
+~문자열
+>>> str = "IoT raspberryPi"
+>>> str
+'IoT raspberryPi'
+>>> str = 'Hi raspberryPi'
+>>> str
+'Hi raspberryPi'
+
+~실수
+>>> a = 3.14
+>>> a
+3.14
+
+~여러가지
+>>> a = 10
+>>> b = 3.14
+>>> c = "Python"
+
+~리스트
+>>> ary = [1,2,3,4,5]
+>>> ary
+[1, 2, 3, 4, 5]
+>>> print(ary)
+[1, 2, 3, 4, 5]
+>>> ary [0] = 100
+>>> ary
+[100, 2, 3, 4, 5]
+>>> ary = [1, 2, 'Hi', 'python']
+>>> ary
+[1, 2, 'Hi', 'python']
+>>> ary[0] + ary[1]
+3
+>>> ary[0] + ary[2]
+err
+>>> str2 = [1, 2, 3, ['a', 'b', 'c']]
+>>> str2
+[1, 2, 3, ['a', 'b', 'c']]
+>>> str2[3]
+['a', 'b', 'c']
+>>> str2[-1]
+['a', 'b', 'c']
+>>> str2[-2]
+3
+>>> str2[-1][0]
+'a'
+
+~리스트 슬라이딩
+>>> ary = [1,2,3,4,5,6,7,8,9,10]
+>>> ary
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+>>> ary[0:9]
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> ary[4:7]
+[5, 6, 7]
+>>> ary[3:]
+[4, 5, 6, 7, 8, 9, 10]
+
+~배열 활용
+>>> a = [1,2,3]
+>>> b = [4,5,6]
+>>> a + b
+[1, 2, 3, 4, 5, 6]
+>>> a * 3
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+>>> len(a)
+3
+>>> a[0] + 'hi'
+err
+>>> str(a[0]) + 'hi'
+'1hi'
+
+~타입 확인
+>>> type(a[0])
+<class 'int'>
+>>> a = 10
+>>> type(a)
+<class 'int'>
+>>> b = 'hi'
+>>> type(b)
+<class 'str'>
+
+~요소 수정 및 삭제
+>>> a = [1,2,3,4,5]
+>>> a[0] = 100
+>>> a
+[100, 2, 3, 4, 5]
+>>> del a[0]
+>>> a
+[2, 3, 4, 5]
+
+~요소 추가
+>>> a.append(6)
+>>> a
+[2, 3, 4, 5, 6]
+>>> a.append([10, 20])
+>>> a
+[2, 3, 4, 5, 6, [10, 20]]
+
+~리스트 정렬
+>>> a = [3,4,2,1,9,7]
+>>> a.sort()
+>>> a
+[1, 2, 3, 4, 7, 9]
+>>> a = ['z', 'r', 'b', 'a']
+>>> a.sort()
+>>> a
+['a', 'b', 'r', 'z']
+
+~리스트 역순정렬
+>>> a.reverse()
+>>> a
+['z', 'r', 'b', 'a']
+
+~리스트 삽입
+>>> a.insert(0, 'T')
+>>> a
+['T', 'z', 'r', 'b', 'a']
+>>> a.insert(3, 'p')
+>>> a
+['T', 'z', 'r', 'p', 'b', 'a']
+
+~요소 삭제
+>>> a.remove('T')
+>>> a
+['z', 'r', 'p', 'b', 'a']
+
+~pop
+>>> a.pop()
+'a'
+>>> a
+['z', 'r', 'p', 'b']
+push는 안됨
+
+~중복
+>>> a = [1,2,3,1,4,5,1]
+>>> a.count(1)
+3
+
+~튜플
+>>> a = (1,2,3,4,5)
+>>> a
+(1, 2, 3, 4, 5)
+>>> a[2] = 30
+err
+>>> del a[2]
+err
+>>> a[:3]
+(1, 2, 3)
+>>> b = (6,7)
+>>> a + b
+(1, 2, 3, 4, 5, 6, 7)
+>>> len(b)
+2
+
+~튜플 삭제
+del a
+
+~딕셔너리
+>>> dic = {'name':'홍길동', 'phone':'1234567', 'sex':'m'}
+>>> dic
+{'name': '홍길동', 'phone': '1234567', 'sex': 'm'}
+>>> dic['name']
+'홍길동'
+>>> dic[3] = {1:'b'}
+>>> dic
+{'name': '홍길동', 'phone': '1234567', 'sex': 'm', 3: {1: 'b'}}
+>>> dic[4] = 'c'
+>>> dic
+{'name': '홍길동', 'phone': '1234567', 'sex': 'm', 3: {1: 'b'}, 4: 'c'}
+>>> del dic[3]
+>>> dic
+{'name': '홍길동', 'phone': '1234567', 'sex': 'm', 4: 'c'}
+>>> dic1 = {1:'a', 1:'b'} // 키중복
+>>> dic1
+{1: 'b'}
+
+~문자열 함수 보기
+>>> dir(str)
+
+~다양한 입출력 방식
+>>> print("3 x 4 = %d" % (3 * 4))
+3 x 4 = 12
+>>> s = '{} x {} = {}'.format(2,3,2*3)
+>>> s
+'2 x 3 = 6'
+>>> s = '{2} x {1} = {0}'.format(2,3,2*3)
+>>> s
+'6 x 3 = 2'
+>>> a = input()
+10
+>>> a
+'10' // 입력받은 10은 문자열
+>>> b = int(input())
+10
+>>> b
+10 // 입력받은 10은 정수
+>>> c = input("입력하세요: ")
+입력하세요: 100
+>>> c
+'100'
+
+~입력받아 간단한 덧셈
+>>> a = int(input("입력하세요: "))
+입력하세요: 10
+>>> b = int(input("입력하세요: "))
+입력하세요: 20
+>>> print(a + b)
+30
+
+~반복문
+>>> i = 1
+>>> while i <= 5:
+...     print(i)
+...     i = i + 1
+...
+1
+2
+3
+4
+5
+
+>>> i = 1
+>>> while i <= 10:
+...     print(i)
+...     i++
+err
+-> 파이선은 증감연산자 x
+
+>>> for i in range(5):
+...     print(i)
+...
+0
+1
+2
+3
+4
+
+>>> for i in range(0, 6, 2):
+...     print(i)
+...
+0
+2
+4
+
+>>> for i in range(6, 0, -2):
+...     print(i)
+...
+6
+4
+2
+
+>>> a = [1,2,3,4,5,6,7,8,9,10]
+>>> for x in a:
+...     print(x)
+...
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+>>> b = ['a', 'b', 'c', 'd', 'e']
+>>> for i in b:
+...     print(i)
+...
+a
+b
+c
+d
+e
+
+~if문
+>>> if a > 5:
+...     print("True")
+... else:
+...     print("False")
+...
+True
+
+if.py
+ 1 m = 500
+ 2
+ 3 if m > 500:
+ 4     print("택시")
+ 5 elif m == 500:
+ 6     print("버스")
+ 7 else :
+ 8     print("걸어가라")
+ 9
+
+~구구단
+>>> for i in range(2, 10):
+...     for j in range(1,10):
+...             print(i*j, end=' ') // 개행x, 한 칸 띄어쓰기
+...     print('') // 개행
+...
+2 4 6 8 10 12 14 16 18
+3 6 9 12 15 18 21 24 27
+4 8 12 16 20 24 28 32 36
+5 10 15 20 25 30 35 40 45
+6 12 18 24 30 36 42 48 54
+7 14 21 28 35 42 49 56 63
+8 16 24 32 40 48 56 64 72
+9 18 27 36 45 54 63 72 81
+
+~사용자 정의 함수
+>>> def func():
+...     print("func() 실행")
+...
+>>> func()
+func() 실행
+
+>>> def func():
+...     a = 10
+...     print("변수g: %d" % a)
+...
+>>> func()
+변수g: 10
+
+>>> def func1():
+...     n = 10
+...     return n
+...
+>>> res = func1()
+>>> res
+10
+
+>>> def sum(a, b):
+...     print(a + b)
+...
+>>> sum(10, 20)
+30
+
+>>> def sum(a, b):
+...     return (a + b)
+...
+>>> res = sum(10, 20)
+>>> print(res)
+30
+
+>>> def str():
+...     print("str 호출")
+...
+>>> str()
+str 호출
+
+>>> def str():
+...     return 'Hi python'
+...
+>>> str()
+'Hi python'
+
+>>> def add(a, b):
+...     return a + b
+...
+>>> print(add(3, 4))
+7
+>>> print(add(a = 30, b = 40))
+70
+
+>>> def add(*argc): // 매개변수를 확실히 모를 때
+...     res = 0
+...     for i in argc:
+...             res = res + i
+...     print(i)
+...
+>>> add(1,2,3,4,5,6,7,8,9,10)
+10
+
+add.py
+ 1 def add():
+ 2     result = 0
+ 3     for i in 10:
+ 4         result = result + i
+ 5     return result
+ 6
+ 7
+
+>>> def add(choice, *argc):
+...     if choice == "add":
+...             result = 0
+...             for i in argc:
+...                     result = result + i
+...     elif choice == "mul":
+...             result = 1
+...             for i in argc:
+...                     result = result * i
+...     return result
+...
+>>> result = add('mul', 1, 2, 3, 4, 5)
+>>> result
+120
+
+~간단한 계산기
+>>> def cal(ch, a, b):
+...     if ch == "add":
+...             res = a + b
+...     elif ch == "sub":
+...             res = a - b
+...     elif ch == "mul":
+...             res = a * b
+...     elif ch == "div":
+...             res = a / b
+...     return res
+...
+>>> c = cal('add', 1, 2)
+>>> c
+3
+
+cal.py
+ 1 try:
+ 2     while True:
+ 3         a = int(input("정수입력: "))
+ 4         b = int(input("정수입력: "))
+ 5         op = input("연산입력: ")
+ 6
+ 7
+ 8         def cal(choice, a, b):
+ 9             if choice == "+":
+10                 return a + b
+11             elif choice == '-':
+12                 return a - b
+13             elif choice == 'x':
+14                 return a * b
+15             elif choice == '/':
+16                 return a / b
+17
+18         result = cal(op, a, b)
+19         print(result)
+20
+21 except keyboardInterrupt:
+
+~스위치를 사용한 점멸 회로
+sw1.py
+1 #-*- coding: utf-8-*- #주석설정
+ 2 import RPi.GPIO as GPIO
+ 3 import time
+ 4
+ 5 switch = 6      #입력핀설정
+ 6
+ 7 GPIO.setmode(GPIO.BCM)  #BCM 모드
+ 8
+ 9 GPIO.setup(switch, GPIO.IN) #핀모드(입력)
+10
+11 try:
+12     while True:
+13         if GPIO.input(switch) == True:
+14             print("Pushed")
+15             time.sleep(0.3) #디바운싱
+16
+17 except KeyboardInterrupt:
+18     GPIO.cleanup()
+19
+
+* 스위치 안눌렀을 때 : 단선상태(플로팅) -> 회로 동작x
+  --> 0v값이 인가되게 회로 구성해야함
+* 풀다운 : 평소 0v, 스위치 누르면 5v -> 그라운드 쪽에 저항
+* 풀업 : 평소 5v, 스위치 누르면 0v -> 전원 쪽에 저항
+
+~~스위치2개를 이용한 점멸회로
+ 1 #-*- coding: utf-8-*-
+ 2 import RPi.GPIO as GPIO
+ 3 import time
+ 4
+ 5 switchi1 = 6
+ 6 switchi2 = 13
+ 7 switcho = 5
+ 8
+ 9 GPIO.setmode(GPIO.BCM)
+10 GPIO.setup(switchi1, GPIO.IN)
+11 GPIO.setup(switchi2, GPIO.IN)
+12 GPIO.setup(switcho, GPIO.OUT)
+13
+14 try:
+15     while True:
+16         if GPIO.input(switchi1) == True:
+17             print("On Pushed")
+18             time.sleep(0.3)
+19             GPIO.output(switcho,True)
+20         elif GPIO.input(switchi2) == True:
+21             print("Off Pushed")
+22             time.sleep(0.3)
+23             GPIO.output(switcho,False)
+24
+25 except KeyboardInterrupt:
+26     GPIO.cleanup()
+27
+
+~스위치1개로 점멸하기
+#-*- coding: utf-8-*-
+import RPi.GPIO as GPIO
+import time
+
+switch1 = 6
+switcho = 5
+state = 1
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(switch1, GPIO.IN)
+GPIO.setup(switcho, GPIO.OUT)
+
+try:
+	while True:
+		if GPIO.input(switch1) == True:
+			time.sleep(0.3)
+			state += 1
+
+		if state % 2 == 0:
+			GPIO.output(switcho, True)
+			#print("ON")
+		elif state % 2 != 0:
+			GPIO.output(switcho, False)
+			#print("OFF")
+
+except KeyboardInterrupt:
+	GPIO.cleanup()

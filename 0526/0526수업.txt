@@ -1,0 +1,222 @@
+~pwm_led2.py
+#-*-coding: utf-8-*-
+
+import RPi.GPIO as GPIO
+import time
+
+ledPin = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(ledPin, GPIO.OUT)
+
+p = GPIO.PWM(ledPin, 25)
+
+p.start(0)
+
+while True:
+	d = input("Enter Brightness(0 to 100) : ")
+	duty = int(d)
+
+	if(duty == 100):
+		p.stop()
+		GPIO.cleanup()
+		break
+	else:
+		p.ChangeDutyCycle(duty)
+		time.sleep(0.4)
+		
+~초음파센서회로
+트리거 : 신호 발생
+에코 : 반사된 신호 수신
+
+트리거에 발생시 시간 측정 시작 -> 에코에서 수신하며 신호가 끝날 때 시간 측정 종료
+신호는 low -> high로 변화되어 에코로 수신됨
+
+~ultrasonic01.py
+#-*-coding: utf-8-*-
+
+import RPi.GPIO as GPIO
+import time
+
+triggerPin = 4
+echoPin = 14
+speaker = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(triggerPin, GPIO.OUT)
+GPIO.setup(echoPin, GPIO.IN)
+GPIO.setup(speaker, GPIO.OUT)
+
+Buzz = GPIO.PWM(speaker, 440)
+
+try:
+	while True:
+		GPIO.output(triggerPin, GPIO.LOW)
+		time.sleep(0.00001)
+		GPIO.output(triggerPin, GPIO.HIGH)
+
+		while GPIO.input(echoPin) == 0:
+			start = time.time()
+		while GPIO.input(echoPin) == 1:
+			stop = time.time()
+
+		rtTotime = stop - start
+		distance = rtTotime * 34000 / 2
+		print("distance : %.2fcm" % distance)
+
+		if distance < 5:
+			for i in range(5):
+				Buzz.start(50)
+				Buzz.ChangeFrequency(200)
+				time.sleep(0.1)
+				Buzz.stop()
+				time.sleep(0.03)
+			time.sleep(0.02)
+		elif distance > 5 and distance < 10:
+			for i in range(3):
+				Buzz.start(50)
+				Buzz.ChangeFrequency(200)
+				time.sleep(0.2)
+				Buzz.stop()
+				time.sleep(0.03)
+			time.sleep(0.035)
+		elif distance > 10 and distance < 20:
+			for i in range(2):
+				Buzz.start(50)
+				Buzz.ChangeFrequency(200)
+				time.sleep(0.25)
+				Buzz.stop()
+				time.sleep(0.03)
+			time.sleep(0.1)
+		elif distance > 20 and distance < 30:
+			Buzz.start(50)
+			Buzz.ChangeFrequency(200)
+			time.sleep(0.3)
+			Buzz.stop()
+			time.sleep(0.5)
+		else:
+			time.sleep(1)
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
+	
+~웹서버
+~flasktest.py
+#-*-coding: utf-8-*-
+from flask import Flask
+
+app = Flask(__name__) #객체 생성
+
+@app.route('/')
+
+def hello():
+    return "Hello Flask!!!:"
+
+if __name__ == "__main__":
+    app.run(host = '0.0.0.0') #어떤 ip라도 접속 가능
+
+vnc 웹 브라우저로 자신ip:5000에 접속
+
+~수정본
+#-*-coding: utf-8-*-
+from flask import Flask
+
+app = Flask(__name__)  #__name__이름을 이용한 Flask 객체 생성
+
+
+@app.route('/') #클라이언트가 uri로 /를 요청하면
+def hello():	#뷰함수가 실행이 된다.
+	return "Hello Flask!!!" #뷰함수는 반드시 return이 있어야 한다.
+
+if __name__ == "__main__": #직접실행을 위한 조건
+	app.run(host = '0.0.0.0', port = "8080") #어떤 ip라도 접속 가능
+	
+~flask01.py
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def Hello():
+	return "Hello Flask"
+
+@app.route('/name')
+def name():
+	return "<h1> My name is Hong </h1>"
+
+@app.route('/age')
+def age():
+	return "<h1> I'm 27 years old </h1>"
+
+@app.route('/job')
+def job():
+	return "<h1> My job is student </h1>"
+
+if __name__ == "__main__":
+	app.run(host = "0.0.0.0", port = "8080")
+	
+~웹서버로 LED 점멸
+~appLedTest.py
+from flask import Flask
+import RPi.GPIO as GPIO
+
+app = Flask(__name__)
+
+ledPin = 21
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(ledPin, GPIO.OUT)
+
+@app.route('/')
+def flask():
+	return "Hello Flask"
+
+@app.route('/led/on')
+def ledOn():
+	GPIO.output(ledPin, True)
+	return "<h1> Led On </h1>"
+
+@app.route('/led/off')
+def ledOff():
+	GPIO.output(ledPin, False)
+	return "<h1> Led Off </h1>"
+
+@app.route('/led/clean')
+def clean():
+	GPIO.cleanup() #GPIO 라이브러리/모듈이 점유한 리소스를 해제하는 기능
+	return "<h1> GPIO Clean </h1>"
+
+if __name__ == "__main__":
+	app.run(host = "0.0.0.0", port = "8080")
+	
+~웹서버에 상태입력하여 LED 점멸
+from flask import Flask
+import RPi.GPIO as GPIO
+
+app = Flask(__name__)
+ledPin = 21
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(ledPin, GPIO.OUT)
+
+@app.route('/')
+def ledFlask():
+	return "<h1> LED Control WebPage </h1>"
+
+@app.route('/led/<state>')
+def led(state):
+	if state == "on":
+		GPIO.output(ledPin, True)
+	else:
+		GPIO.output(ledPin, False)
+	return "LED " + state
+
+@app.route('/led/clean')
+def clean():
+	GPIO.output(ledPin, False)
+	GPIO.cleanup()
+	return "<h1> GPIO CLEAN </h1>"
+
+if __name__ == "__main__":
+	app.run(host = "0.0.0.0", port = "8080")
+	
+~웹버튼 사용하여 LED 점멸
+

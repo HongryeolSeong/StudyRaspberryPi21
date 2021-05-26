@@ -1,0 +1,286 @@
+~interrupt
+인터럽트 : 점프 및 분기
+폴링 : 절차적으로 프로그램 실행
+
+~int.py
+#-*- coding: utf-8-*-
+import RPi.GPIO as GPIO
+import time
+
+switch = 5
+flag = False
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(switch, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)	#내부풀다운 사용
+
+def swBlink(channel):	# callback 함수
+	global flag 	# 전역변수를 함수 내 사용시 선언 필요
+	if flag == False:
+		print("interrupt")
+		flag = True
+	else:
+		flag = False
+		
+#인터럽터핀에 라이징신호가 인가되면 콜백함수로 리턴되어 실행된다.
+#하드웨어가 스위치 눌림 신호(라이징)를 감지
+GPIO.add_event_detect(switch, GPIO.RISING, callback=swBlink)
+
+try:
+	while True:
+		pass
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
+
+* 신호의 종류
+High
+Row
+Rising : Row -> High 되는 순간
+Folling : High -> Row 되는 순간
+Both : 변화기간의 중간
+
+~int_led.py
+#-*- coding: utf-8-*-
+import RPi.GPIO as GPIO
+import time
+
+switchi = 5
+switcho = 6
+flag = False
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(switchi, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(switcho, GPIO.OUT)
+
+def swBlink(channel):
+	global flag
+	if flag == False:
+		print("interrupt_LED_ON")
+		GPIO.output(switcho, True)
+		flag = True
+	else:
+		print("interrupt_LED_OFF")
+		GPIO.output(switcho, False)
+		flag = False
+
+GPIO.add_event_detect(switchi, GPIO.RISING, callback=swBlink)
+
+try:
+	while True:
+		pass
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
+
+~PWM
+: 입력을 주는 시간(duty)에 따라 전체 입력량 조절
+
+~pwm1.py
+#-*- coding: utf-8-*-
+import RPi.GPIO as GPIO
+import time
+
+pwmPin = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pwmPin, GPIO.OUT)
+
+p = GPIO.PWM(pwmPin, 0.5)
+p.start(1)
+input("Press return to stop")
+p.stop()
+
+GPIO.cleanup()
+
+~melody.py
+#-*-coding: utf-8-*-
+
+import RPi.GPIO as GPIO
+import time
+
+pinPiezo = 6
+Melody = [400, 400, 500, 500, 400, 400, 300, 400, 400, 300, 300, 250, 400, 400, 500, 500, 400, 400, 300, 350, 300, 250, 300, 100]
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pinPiezo, GPIO.OUT)
+
+Buzz = GPIO.PWM(pinPiezo, 440)
+
+try:
+	while True:
+		Buzz.start(50)
+		for i in range(0, len(Melody)):
+			Buzz.ChangeFrequency(Melody[i])
+			time.sleep(0.5)
+		Buzz.stop()
+		time.sleep(1)
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
+	
+~piano.py
+#-*-coding: utf-8-*-
+
+import RPi.GPIO as GPIO
+import time
+import keyboard
+
+pinPiezo = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pinPiezo, GPIO.OUT)
+
+Buzz = GPIO.PWM(pinPiezo, 440)
+
+try:
+	while True:
+		a = int(input())
+		Buzz.start(50)
+
+		if a == 1:
+			Buzz.ChangeFrequency(100)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 2:
+			Buzz.ChangeFrequency(200)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 3:
+			Buzz.ChangeFrequency(300)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 4:
+			Buzz.ChangeFrequency(400)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 5:
+			Buzz.ChangeFrequency(500)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 6:
+			Buzz.ChangeFrequency(600)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 7:
+			Buzz.ChangeFrequency(700)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 8:
+			Buzz.ChangeFrequency(800)
+			time.sleep(0.4)
+			Buzz.stop()
+		elif a == 9:
+			Buzz.ChangeFrequency(900)
+			time.sleep(0.4)
+			Buzz.stop()
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
+	
+~piano2.py
+import pygame, time
+import RPi.GPIO as GPIO
+
+from pygame.locals import*
+pygame.init()
+
+display_screen = pygame.display.set_mode((815, 85))
+pygame.display.set_caption('MINI PYTHON PIANO')
+pygame.mouse.set_visible(1)
+white = (255, 255, 255)
+black = (0, 0, 0)
+display_font = pygame.font.Font('/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf', 32)
+text = (u"키보드 1~8까지 꾸욱 눌러 보세요. \ Esc키를 누르면 종료 됩니다.")
+display_text = display_font.render(text, True, black, white)
+display_text_vis = display_text.get_rect()
+display_text_vis.center = (340, 34)
+
+pin = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pin, GPIO.OUT)
+
+Buzz = GPIO.PWM(pin, 440)
+
+try:
+	while True:
+		#Buzz.start(50)
+		for event in pygame.event.get():
+			if event.type == KEYDOWN:
+				if event.key == pygame.K_1:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(100)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_2:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(200)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_3:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(300)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_4:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(400)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_5:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(500)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_6:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(600)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_7:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(700)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_8:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(800)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_9:
+					Buzz.start(50)
+					Buzz.ChangeFrequency(900)
+					time.sleep(0.3)
+					Buzz.stop()
+				if event.key == pygame.K_q:
+					pygame.quit()
+
+except keyboardInterrupt:
+	GPIO.cleanup()
+
+~pwm_led.py
+#-*-coding: utf-8-*-
+
+import RPi.GPIO as GPIO
+import time
+
+ledPin = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(ledPin, GPIO.OUT)
+
+p = GPIO.PWM(ledPin, 255)
+
+p.start(0)
+
+try:
+	while True:
+		for i in range(100):
+			p.ChangeDutyCycle(i)
+			time.sleep(0.1)
+		for i in reversed(range(100)):
+			p.ChangeDutyCycle(i)
+			time.sleep(0.1)
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
