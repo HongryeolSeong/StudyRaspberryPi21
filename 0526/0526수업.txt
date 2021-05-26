@@ -182,7 +182,7 @@ def ledOff():
 
 @app.route('/led/clean')
 def clean():
-	GPIO.cleanup() #GPIO 라이브러리/모듈이 점유한 리소스를 해제하는 기능
+	GPIO.cleanup() #GPIO 라이브러리/모듈이 점유한 리소스를 해제
 	return "<h1> GPIO Clean </h1>"
 
 if __name__ == "__main__":
