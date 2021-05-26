@@ -91,4 +91,38 @@ PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)
 <br>
 <br>
 
-## PWM 파이썬.ver 🎯
+## 초음파센서 회로 파이썬.ver 🎯
+
+* 트리거 : 신호 발생   
+  에코 : 반사된 신호 수신   
+
+* 트리거에 발생시 시간 측정 시작 -> 에코에서 수신하며 신호가 끝날 때 시간 측정 종료   
+  신호는 low -> high로 변화되어 에코로 수신됨   
+
+초음파센서 활용한 차량 후방 감지 알림장치   
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/ultrasonic01.py "15")
+<br>
+<br>
+<br>
+
+## Flask라이브러리 활용한 웹제어 LED 파이썬.ver 🎯
+
+Flask로 기본 웹 생성   
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/flasktest.py "16")
+<br>
+
+여러페이지 생성   
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/flaskprint.py "17")
+<br>
+
+get방식 LED점멸   
+[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/appLedTestGet.py "18")
+<br>
+
+get방식+상태입력 LED점멸   
+[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/appLedTestState.py "19")
+<br>
+
+post방식+버튼입력 LED점멸   
+[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/appLedTestButton.py "20")
+<br>
