@@ -1,0 +1,93 @@
+~1초 단위로 LED 10번 점멸 + 무한 반복
+~led1s.py
+import RPi.GPIO as GPIO
+import time
+
+led = 21
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(led, GPIO.OUT)
+
+try:
+	#while True:
+	for i in range(10):
+		GPIO.output(led, True)
+		time.sleep(1)
+		GPIO.output(led, False)
+		time.sleep(1)
+
+except KeyboardInterrupt:
+	GPIO.cleanup()
+	
+~cron 사용 원하는 시간에 원하는 프로그램 실행
+>>> crontab -e
+>>> 1
+마지막 줄에 * * * * * sudo python /home/pi/Work/led1s.py
+-> 디폴트값(1분)단위로 작동
+
+~프로그램 백그라운드로 실행
+led1s.py에 
+#! /usr/bin/env python3.7 추가
+>> sudo nano /etc/rc.local
+19행에
+	python /home/pi/Work/led1s.py & #추가시 해당 프로그램을 백그라운드로 실행
+해당 파일 경로로 돌아간 후
+>>> chmod 777 led1s.py #누구나 쓰고 읽고 실행 가능하게 권한 수정
+
+~DB 연동
+>>> sudo apt-get update
+>>> sudo apt-get install sqlite3
+>>> sqlite3 tesdb.db
+>>> create table testTb (id, name, phone);
+>>> .tables testTb
+>>> .exit
+
+* 자료형 종류
+INTEGER 정수
+TEXT 문자열
+REAL 실수
+BLOB 바이너리
+NULL 빈 값
+
+~sqlitePy.py
+import sqlite3
+
+dbconn = sqlite3.connect('./tesdb.db')
+cursor = dbconn.cursor()
+
+try:
+	cursor.execute("CREATE TABLE if not exists user(id INTEGER, name text, phone text, sex text)")
+	cursor.execute("INSERT INTO user(id, name, phone, sex) VALUES(1, 'hong', '010-7759-0276', 'm')")
+	cursor.execute("INSERT INTO user(id, name, phone, sex) VALUES(2, 'yeong', '010-1234-1234', 'm')")
+	cursor.executemany("insert into user(id, name, phone, sex) values(?, ?, ?, ?)",\
+		[(3, 'kim', '010-1111-1111', 'm'), (4, 'seol', '010-2222-2222', 'm'), (5, 'soe', '010-5209-0276', 'f')])
+
+	dbconn.commit()
+except KeyboardInterrupt:
+	dbconn.close()
+	
+>>> python sqlitePy.py #실행 후
+>>> sqlite3
+>>> .open tesdb.db
+>>> .tables
+>>> .schema user
+>>> select * from user;
+테이블 출력됨
+
+~pyqt5활용 파이썬 폼 생성
+>>> sudo apt-get install python3-pyqt5
+>>> sudo apt-get install qttools5-dev-tools -y
+vnc뷰어-산딸기-개발탭에 Qt 생성됐는지 확인
+Qt Designer로 작업 후 저장
+>>> sudo apt-get install pyqt5-dev-tools #설치 후
+>>> pyuic5 -x test.ui -o testPy.py #.ui파일을 .py로 변환
+
+~testPy.py
+
+~라즈베리파이 평가
+1. LED 점멸
+2. 무드등
+3. 노래
+4. 후방감지
+
+~webtest.py + index.html
