@@ -21,6 +21,9 @@ def home():
 def data():
 	data = request.form['led']
 	if data == 'on':
+		#ledPin = 21
+		#GPIO.setmode(GPIO.BCM)
+		#GPIO.setup(ledPin, GPIO.OUT)
 		GPIO.output(ledPin, True)
 		return home()
 	elif data == 'off':
@@ -63,10 +66,6 @@ def data():
 			time.sleep(1)
 	elif data == 'clean2':
 		GPIO.cleanup()
-		return home()
-	elif data == 'restart2':
-		GPIO.setmode(GPIO.BCM)
-		GPIO.setup(lenPin, GPIO.OUT)
 		return home()
 	elif data == 'start3':
 		Buz = GPIO.PWM(ledPin, 440)
@@ -119,6 +118,5 @@ def data():
 	elif data == 'clean3':
 		GPIO.cleanup()
 		return home()
-
 if __name__ == "__main__":
 	app.run(host = "0.0.0.0", port = "8080")
