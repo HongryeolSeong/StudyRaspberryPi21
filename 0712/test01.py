@@ -29,7 +29,7 @@ print(array * 2)
 array[3] = 7
 print(array)
 
-# Tuple
+# Tuple 
 person = ('Kim', 24, 'male')
 print(person)
 print(person[1])
