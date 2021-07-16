@@ -1,0 +1,57 @@
+/// 리눅스
+// 리눅스 기본 명령어
+ls, cd, cp, ...
+
+// 사용자 권한
+chmod 명령을 통해 권한을 준다
+rwx순으로 이진수 및 8진수를 통해 권한 표시 - 7이하 수만 사용 가능
+
+ex) chtest.txt - 1, 2
+
+// 파일 링크 = 윈도우의 바로가기
+ex) LinkTest/catTest.txt - 3
+>>> ln -s ./LinkTest/catTest.txt Test.txt
+
+// find
+>>> find /bin/ -name r*
+
+// tar
+해당 디렉 내 모든 파일을 압축
+>>> tar cvfz archive.tar.gz * - 4
+
+// 관리자 권한 실행
+>>> nano /etc/passwd - 5
+
+// 프로세스 관리자
+ps, kill
+
+// 네트워크 관리
+ifconfig, iwconfig
+
+ping - 네트워크 연결 점검 - 6
+
+telnet - 해당 서버가 정상 작동 중인지
+구글 - 7, ssms - 8
+
+// 소프트웨어 패키지 관리자
+>>> sudo apt-install ~~ -y
+-> 설치할지 여부 묻지않고 바로 설치
+
+// 텍스트 편집기
+nano가 짱
+
+/// 파이썬
+// jupyter와 .py의 차이
+f1 -> jupyter: Create New Blank ~
+- 9, 10
+
+// 파이썬 기본 문법
+ex) test01.py ~ test05.py
+
+// 깃 업뎃
+1. >>> git clone 리포짓토리 주소
+2. 비쥬얼 스튜디오 코드에서 작업 영역에 해당 폴더 추가
+3. 해당 폴더의 터미널에서 
+>>> git config --global user.email "ghd0276@naver.com"
+>>> git config --global user.name "HongryeolSeong"
+4. 커밋, 푸시 후 리눅스 웹을 통해 깃허브와 연동

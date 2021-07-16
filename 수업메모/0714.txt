@@ -1,0 +1,65 @@
+// 옛날방식 플라스크활용 웹 서버 구현
+ex)flserver01.py
+
+// get/post
+get방식
+ex)flserver06.py + index2.html
+{{}}는 주석해도 영향을 주므로 {##} + 주석 상태로 할 것
+
+post방식
+ex)flserver06.py + login.html
+
+post방식-html반환
+ex)flserver06.py + result.html
+
+// 라즈베리파이 MariaDB
+설치
+>>> apt install mariadb-server mariadb-client mariadb-common
+
+구성 확인 및 설정
+>>> sudo nano /etc/mysql/my.cnf
+>>> sudo nano /etc/mysql/mariadb.conf.d/50-client.cnf
+>>> sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+# port = 3306 에서 # 제거
+
+재실행
+>>> sudo service mysql restart
+or
+>>> sudo /etc/init.d/mysql restart
+
+버전 확인
+>>> sudo mysqladmin version
+
+비밀번호 설정
+https://bskyvision.com/1005(feat. 연성) 참고할 것
+
+로그인
+>>> mysql -u root -port
+존재하는 DB 확인
+>>> show databases;
+DB 생성
+>>> create database test;
+test DB로 진입
+>>> use test;
+
+student 테이블 생성 - 1
+insert
+>>> insert into student values (1, 'Hong GilDong', '1985-01-01'); - 2
+
+// 라즈베리파이 비쥬얼스튜디오코드 db작업
+>>> sudo apt install python3-mysqldb
+ex)mysqltest.py
+
+db 데이터를 웹서버에 출력
+ex)flserver07.py + mysqldata.html - 3
+
+// 웹 크롤링
+오픈api가 제공 안될때 해당 웹페이지의 데이터를 가져옴
+https://search.naver.com/search.naver?query=날씨
+
+필요 라이브러리 설치
+>>> pip install requests
+>>> pip install BeautifulSoup4
+
+해당 웹페이지에서 필요한 데이터 얻기
+ex)webcrawling.py - 4
