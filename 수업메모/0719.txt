@@ -15,7 +15,7 @@
 >>> sudo apt autoremove
 -> 그래도 안됨
 
--------이 부분만 하면 됨--------------------
+-------이 부분만 하면 됨---------------------
 참고)https://jvvp.tistory.com/1179
 https://bebutae.tistory.com/153 -> 복사됨
 
