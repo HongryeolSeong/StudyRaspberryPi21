@@ -1,0 +1,43 @@
+// 파일 입출력 + 예외 처리
+test06.py
+
+// with = c#의 using 구문
+
+// async/await
+
+// 모듈
+test07.py
+
+numpy 설치
+>>> pip install numpy
+업그레이드 필요시
+>>> python -m pip install --upgrade pip
+
+// 윈도우 비쥬얼스튜디오 코드로 작업 옮기기
+1. 윈도우에 파이썬 설치
+- add to path 할 것
+2. 코드에서 파이썬 확장팩 설치
+
+// 웹 서버 구현
+nodejs.opg 에서 노드js 설치
+
+ex)main.js
+>>> node main.js
+웹브라우저에 127.0.0.1:8080으로 접속 후 텍스트 확인
+
+ex)wserver.js + index.html
+
+// flask
+flask 설치
+>>> pip install flask
+
+ex)flserver01.py
+
+flask 사용시 js파일은 static/js 폴더에, html은 templates 폴더에 넣을 것
+ex)flserver02.py + templates/index.html + static/css/main.css
+
+백단에서 프론드로 데이터 전달
+ex)flserver03.py
+
+로그인 페이지
+ex)flserver04.py + templates/login.html

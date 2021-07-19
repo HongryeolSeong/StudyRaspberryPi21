@@ -1,0 +1,19 @@
+// 라즈베리파이 설정
+컨피규레이션 -> interfaces -> 카메라 enable
+
+// 카메라 사용
+사진
+>>> raspistill -o capture.jpg
+카메라 되는지 확인
+>>> vcgencmd get_camera
+동영상
+>>> raspivid -o video.h264
+
+항상 update -> upgrade 순으로 할 것
+
+// 디렉토리
+>>> cd /
+가장 최상위 디렉으로 이동
+
+// 슈퍼유저
+>>> sudo ~~

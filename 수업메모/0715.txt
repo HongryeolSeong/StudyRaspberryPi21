@@ -1,0 +1,21 @@
+// qt
+설치
+>>> sudo apt install python3-pyqt5
+>>> sudo pat install qttools5-dev-tools
+
+기본 프레임
+ex)pyqt_ex01.py - 1
+
+클래스 생성 윈도우
+ex)pyqt_ex02.py
+
+사용자 윈도우 구성
+ex)pyqt_ex03.py
+사이즈 조절 - setGeometry
+
+// Qt Designer
+ex)mainWindow01.ui + pyqt_ex04.py
+
+// Qt - 네이버 오픈api 활용
+네이버 검색 api 신청 -> url:http://localhost:8080
+ex)naverSearch.ui + pyqt_ex05.py + naverSearch.py
