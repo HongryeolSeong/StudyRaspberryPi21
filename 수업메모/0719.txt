@@ -1,0 +1,47 @@
+// 웹 캠 활용
+>>> raspistill -o cap.jpg
+>>> raspivid -o video.h264 -t 5000
+
+// opencv
+필요 라이브러리 설치
+>>> sudo apt install libopencv-dev
+>>> sudo apt install python3-dev
+
+안될시
+>>> pip install opencv-contrib-python==4.1.0.25
+>>> sudo apt install python3-opencv
+>>> sudo apt remove python3-opencv
+>>> sudo apt remove libopencv-dev
+>>> sudo apt autoremove
+-> 그래도 안됨
+
+-------이 부분만 하면 됨--------------------
+참고)https://jvvp.tistory.com/1179
+https://bebutae.tistory.com/153 -> 복사됨
+
+추가 설치
+>>> sudo apt-get install python3-h5py
+>>> sudo apt install libqt4-test
+
+// 카메라 실행
+ex)test.py
+ex)opencv_ex01.py
+or
+>>> sudo apt-get install luvcview
+>>> luvcview
+
+// 실행 중 캡쳐 및 녹화
+ex)opencv_ex02.py
+
+// 얼굴 인식
+교안 코드 깃 클론 및 작업 영역에 파일 넣기
+>>> git clone https://github.com/swkim01/RaspberryPiWithIOT.git
+
+haarcascade_eye.xml, haarcascade_frontalface_alt.xml, bpcascade_frontalface.xml
+작업 영역에 옮길 것
+
+ex)opencv_ex03.py
+
+// 이미지 처리
+맘에 드는 사진 하나 다운받아서 작업 영역에 넣을 것
+ex)opencv_ex04.py
