@@ -1,0 +1,105 @@
+OpenCV 설치
+
+우선 라즈베리파이의 패키지 목록을 업데이트해줍니다.
+> sudo apt-get update
+> sudo apt-get upgrade
+
+OpenCV의 패키지들을 설치합니다.(순서대로 설치해주세요.)
+> sudo apt-get install build-essential cmake -y
+> sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev -y
+> sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libxvidcore-dev libx264-dev libxine2-dev -y
+> sudo apt-get install libv4l-dev v4l-utils -y
+> sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev -y
+> sudo apt-get install libgtk2.0-dev -y
+> sudo apt-get install mesa-utils libgl1-mesa-dri libgtkgl2.0-dev libgtkglext1-dev -y
+> sudo apt-get install libatlas-base-dev gfortran libeigen3-dev -y
+> sudo apt-get install python2.7-dev python3-dev python-numpy python3-numpy -y
+
+나중에 해야할 필요도 있습니다.
+> sudo apt-get install python3-h5py -y
+> sudo apt install libqt4-test
+
+OpenCV의 소스코드를 다운받아줍니다.
+openCV를 설치하기 위해 임시로 사용할 폴더를 생성해줍니다.
+> mkdir opencv
+
+생성한 폴더로 이동해주세요.
+> cd opencv
+
+아래와 같이 openCV의 소스코드를 다운받고, 압축을 풀어줍니다.
+> wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.2.zip
+> unzip opencv.zip
+
+이번엔 openCV_contrib의 소스코드를 다운받고, 압축을 풀어줍니다.
+> wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.2.zip
+> unzip opencv_contrib.zip
+
+
+
+아래 폴더로 이동해주세요.
+> cd opencv-4.1.2
+
+컴파일을 위해 폴더를 생성해주세요.
+> mkdir build
+
+생성한 폴더로 이동합니다.
+> cd build
+
+아까 설치한 cmake를 통해 openCV에 대한 컴파일 설정을 해줍니다.
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D WITH_TBB=OFF \
+-D WITH_IPP=OFF \
+-D WITH_1394=OFF \
+-D BUILD_WITH_DEBUG_INFO=OFF \
+-D BUILD_DOCS=OFF \
+-D INSTALL_C_EXAMPLES=ON \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D BUILD_EXAMPLES=OFF \
+-D BUILD_TESTS=OFF \
+-D BUILD_PERF_TESTS=OFF \
+-D ENABLE_NEON=ON \
+-D ENABLE_VFPV3=ON \
+-D WITH_QT=OFF \
+-D WITH_GTK=ON \
+-D WITH_OPENGL=ON \
+-D OPENCV_ENABLE_NONFREE=ON \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.1.2/modules \
+-D WITH_V4L=ON \
+-D WITH_FFMPEG=ON \
+-D WITH_XINE=ON \
+-D ENABLE_PRECOMPILED_HEADERS=OFF \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D OPENCV_GENERATE_PKGCONFIG=ON ../
+
+
+위의 명령을 모두 콘솔에 붙여넣으면 빌드파일 생성이 시작됩니다. 아래와 같은 화면이 보여야 정상설치가 완료된 것입니다.
+
+컴파일 시 메모리 부족 현상을 방지하기 위해 주저장장치를 메모리로 사용할 수 있도록 설정 합니다. 
+> sudo nano /etc/dphys-swapfile
+
+해당 설정파일을 살펴보시면 CONF_SWAPSIZE=100이라고 쓰여있는 문구를 주석처라 한 다음  CONF_SWAPSIZE=2048이라는 문구를 입력해주세요.
+
+Ctrl + S로 저장한 뒤 Ctrl + X로 빠져나옵니다. 설정파일을 재시작해서 변경된 값을 적용해줍니다.
+> sudo /etc/init.d/dphys-swapfile restart
+
+컴파일을 시작합니다.
+다음 명령어를 입력해 컴파일을 진행해주세요.
+> make -j4
+
+컴파일이 완료되면 아래와 같은 화면이 보입니다.
+
+최종 설치합니다.
+> sudo make install
+
+openCV라이브러리를 찾을 수 있도록 아래 명령어를 실행시켜주세요.
+> sudo ldconfig
+
+dphys-swapfile 설정파일을 원래대로 수정해줍니다.
+> sudo nano /etc/dphys-swapfile
+
+CONF_SWAPSIZE=100으로 복귀시킵니다. 
+설정파일을 재시작해주세요.
+> sudo /etc/init.d/dphys-swapfile restart
+
+

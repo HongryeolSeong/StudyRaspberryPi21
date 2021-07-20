@@ -1,0 +1,40 @@
+https://youneedawiki.com/app/page/1PVdD-iqYXdhMoNS513V0zOF0jEdPVfosqIRnbG45KF0
+
+// 이미지 처리 이어서
+ex)opencv_img01.py
+
+흑백처리
+ex)opencv_img02.py
+
+이미지 사이즈 조절
+ex)opencv_img03.py
+
+블러, 선명처리
+ex)opencv_img04.py
+
+노이즈
+ex)opencv_img05.py
+
+이미지 대비
+ex)opencv_img06.py
+
+// 영상 처리
+기본 틀
+ex)opencv_mov01.py
+
+흑백화
+ex)opencv_mov02.py
+
+영상 자르기
+ex)opencv_mov03.py
+
+블러 처리 + 노이즈 처리 + 영상 합쳐서 출력하기
+ex)opencv_mov04.py
+
+영상 자막 처리
+나눔고딕 설치
+https://syssurr.tistory.com/270
+ex)opencv_mov05.py
+
+영상 캡쳐 및 녹화
+ex)opencv_mov06.py
