@@ -37,14 +37,15 @@ while True:
     elif key == ord('c'):
         cv2.imwrite('./0719_20/capture/img_{}.png'.format(fileDateTime), frame)
         print('이미지 저장 완료')
-    elif key == ord('r'):   # 레코드 시작
+    elif key == ord('r'): # and is_record == False:   # 레코드 시작
         is_record = True
         video = cv2.VideoWriter('./0719_20/capture/record_{0}.avi'.format(fileDateTime), fourcc, 20, (w, h))
         print('녹화 시작')
-    elif key == ord('t'):   # 레코드 종료
+    elif key == ord('t'): # and is_record == True:   # 레코드 종료
         is_record = False
-        video.release()     # 객체 해제
-        print('녹화 완료')
+        if 'video' in locals():
+            video.release()     # 객체 해제
+            print('녹화 완료')
 
     # 녹화중 빨간점 표시
     if is_record:
