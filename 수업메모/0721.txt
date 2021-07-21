@@ -1,0 +1,12 @@
+// 움직임이 관찰될 때 캡쳐
+ex)opencv_mov07.py
+
+// gps
+tx -> rx
+rx -> tx에 꼽을 것
+
+update 및 upgrade 할 것
+https://youneedawiki.com/app/page/1sWJG4c7Xpl40VIh0B3dvCey45NJkThaIeZZd2qu5VFA
+
+gps 데이터 출력
+ex)gps_ex01.py
