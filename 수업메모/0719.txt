@@ -16,8 +16,8 @@
 -> 그래도 안됨
 
 -------이 부분만 하면 됨---------------------
-참고)https://jvvp.tistory.com/1179
-https://bebutae.tistory.com/153 -> 복사됨
+https://jvvp.tistory.com/1179 -> 참고용
+https://bebutae.tistory.com/153 -> 이 링크대로 진행함
 
 추가 설치
 >>> sudo apt-get install python3-h5py
