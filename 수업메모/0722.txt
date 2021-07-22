@@ -1,0 +1,7 @@
+// 지도에 좌표 표시
+https://youneedawiki.com/app/page/1PtR4kWDWU1qyYp_5sxU3pU_hzdstIk3ajTjblJhrqyc
+
+ex)geometry_ex01.ipynb
+
+한국 지도 표시 - 데이터 파일 생성
+ex)province-simple.json
