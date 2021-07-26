@@ -1,0 +1,688 @@
+16 스마트미러 제작
+Last updated by MG Sung a day ago
+
+스마트미러
+
+마이크, 스피커 설정이 완료된 이후 터미널을 열고 시작합니다.
+
+> curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
+
+컬(curl)을 통해서 위의 사이트에서 node.js와 npm 등을 다운로드 받습니다. 1분 정도의 시간이 걸리고 마지막에 별 탈없이 완료되면 콘솔이 다시 나타날 겁니다. 스마트미러 기반 언어가 node.js이기 때문에 node.js를 설치합니다.
+
+> sudo apt install -y nodejs
+
+다음 깃헙에서 스마트미러 프로젝트인 매직미러를 클론합니다.
+
+> git clone https://github.com/MichMich/MagicMirror
+
+클론 디렉토리로 옮긴 후
+
+> cd MagicMirror/
+
+매직미러를 설치합니다. 오래 걸립니다.
+
+> npm install
+
+필요한 설정 파일 복사하고
+
+> cp config/config.js.sample config/config.js
+
+실행 테스트해봅니다.
+
+> npm run start
+
+아래와 같이 실행됩니다.
+
+
+
+
+Ctrl+Q 로 종료하면 됩니다.
+
+> cd ..
+
+부모 폴더로 돌아오겠습니다.
+
+
+스마트미러 자동실행
+먼저 자동실행을 위한 pm2를 설치합니다.
+
+> sudo npm install -g pm2
+
+pm2를 시작합니다.
+
+> pm2 startup
+
+pm2를 시작하면 아래의 명령을 실행하라는 문구가 나타납니다. 그대로 복사해서 실행합니다.
+
+> sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+
+현재 위치가 /home/pi이면 상관없지만 이 위치가 아니라면 이동하십시오.
+
+> cd ~
+
+다음 쉘 파일인 mm.sh를 텍스트 에디터로 엽니다.
+
+> sudo nano mm.sh
+
+
+아래의 내용을 쉘파일에 입력하고 저장합니다. Ctrl + S. 빠져나오면 됩니다.
+
+cd ./MagicMirror
+DISPLAY=:0 npm run start
+
+
+다음 권한을 변경합니다, 소유자, 그룹, 기타 모두에게 실행권한을 줍니다. 아니면 +x 옵션으로 처리할 수도 있습니다.
+
+> sudo chmod 755 mm.sh
+
+또는
+
+> sudo chmod +x mm.sh
+
+
+pm2 서비스를 시작하려면 아래의 명령을 입력 합니다.
+
+> pm2 start mm.sh
+
+그리고 이 상태를 저장합니다.
+
+> pm2 save
+
+
+이전과 같이 Ctrl + Q로 종료를 시켜도 다시 매직미러가 시작되는 것을 볼 수 있습니다.
+
+다시 종료하고 싶으면 아래의 pm2 명령을 입력하세요.
+
+> pm2 stop mm.sh
+
+
+화면 변경 작업
+스마트 미러를 모니터 화면에서 Landscape로 사용할 수 도 있지만 Portrait 방식으로 세로로 세워서 사용해야 하는 경우도 생길 수 있습니다.
+
+이럴때 필요한 화면 설정 방법이 있습니다.
+
+이 때 라즈베리파이3는 4와 다르게 한가지 설정을 더 해줘야 합니다.
+
+> sudo raspi-config
+
+라즈베리파이 하드웨어 및 네트워크 설정 기능에 진입해서,
+
+Advanced options > GL Driver > GL(Full KMS)... 를 선택하고 설정 화면을 빠져나온 뒤 재부팅을 해줍니다.
+
+
+이제 화면을 전환하기 위한 작업이 필요합니다.
+
+재부팅 후 X윈도우 화면에서 기본 설정 > Screen Configuration를 클릭하고 화면의 메뉴 중 Configure > 방향 > 원하는 방향으로 선택한 뒤 적용을 클릭합니다.
+
+
+화면보호기가 동작할 시 이것도 꺼줘야 합니다. 만약 메뉴에 기본 설정 > 화면보호기가 없다면 상관없습니다.
+
+WiFi 절전모드도 확인 후 꺼줍니다.
+
+> iwconfig
+
+확인해보면 wlan0 오른쪽 내용 중 Power Management:on 으로 되어 있으면 Wifi 절전모드가 켜져 있는 것입니다. 이 경우 off로 변경해줍니다.
+
+> sudo nano /etc/rc.local
+
+exit 0 바로 윗줄에 아래의 구문을 입력합니다.
+
+/sbin/iwconfig wlan0 power off
+
+
+나노 에디터를 저장 후 빠져나온 뒤 재부팅합니다.
+
+
+한글설정
+먼저 작업을 하려면 pm2를 멈춰줍니다.
+
+> pm2 stop mm.sh
+
+
+다음 콘솔에서 아래의 명령을 실행합니다, 지니 에디터를 쓴다는 의미입니다, 위치는 /home/pi 입니다. sudo 같은 명령으로 에디터를 쓸 게 아니면 지니 에디터가 편합니다. VS code를 써도 됩니다.
+
+> geany MagicMirror/config/config.js
+
+
+config.js 파일 내용입니다.
+
+/* Magic Mirror Config Sample
+*
+* By Michael Teeuw https://michaelteeuw.nl
+* MIT Licensed.
+*
+* For more information on how you can configure this file
+* see https://docs.magicmirror.builders/getting-started/configuration.html#general
+* and https://docs.magicmirror.builders/modules/configuration.html
+*/
+let config = {
+        address: "localhost",         // Address to listen on, can be:
+                                                        // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+                                                        // - another specific IPv4/6 to listen on a specific interface
+                                                        // - "0.0.0.0", "::" to listen on any interface
+                                                        // Default, when address config is left out or empty, is "localhost"
+        port: 8080,
+        basePath: "/",         // The URL path where MagicMirror is hosted. If you are using a Reverse proxy
+                                        // you must set the sub path here. basePath must end with a /
+        ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],         // Set [] to allow all IP addresses
+                                                                                                                        // or add a specific IPv4 of 192.168.1.5 :
+                                                                                                                        // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+                                                                                                                        // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+                                                                                                                        // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+        useHttps: false,                 // Support HTTPS or not, default "false" will use HTTP
+        httpsPrivateKey: "",         // HTTPS private key path, only require when useHttps is true
+        httpsCertificate: "",         // HTTPS Certificate path, only require when useHttps is true
+
+        language: "en",
+        locale: "en-US",
+        logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+        timeFormat: 24,
+        units: "metric",
+        // serverOnly:  true/false/"local" ,
+        // local for armv6l processors, default
+        //   starts serveronly and then starts chrome browser
+        // false, default for all NON-armv6l devices
+        // true, force serveronly mode, because you want to.. no UI on this device
+
+        modules: [
+                {
+                        module: "alert",
+                },
+                {
+                        module: "updatenotification",
+                        position: "top_bar"
+                },
+                {
+                        module: "clock",
+                        position: "top_left"
+                },
+                {
+                        module: "calendar",
+                        header: "US Holidays",
+                        position: "top_left",
+                        config: {
+                                calendars: [
+                                        {
+                                                symbol: "calendar-check",
+                                                url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"                                        }
+                                ]
+                        }
+                },
+                {
+                        module: "compliments",
+                        position: "lower_third"
+                },
+                {
+                        module: "weather",
+                        position: "top_right",
+                        config: {
+                                weatherProvider: "openweathermap",
+                                type: "current",
+                                location: "New York",
+                                locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+                                apiKey: "YOUR_OPENWEATHER_API_KEY"
+                        }
+                },
+                {
+                        module: "weather",
+                        position: "top_right",
+                        header: "Weather Forecast",
+                        config: {
+                                weatherProvider: "openweathermap",
+                                type: "forecast",
+                                location: "New York",
+                                locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+                                apiKey: "YOUR_OPENWEATHER_API_KEY"
+                        }
+                },
+                {
+                        module: "newsfeed",
+                        position: "bottom_bar",
+                        config: {
+                                feeds: [
+                                        {
+                                                title: "New York Times",
+                                                url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+                                        }
+                                ],
+                                showSourceTitle: true,
+                                showPublishDate: true,
+                                broadcastNewsFeeds: true,
+                                broadcastNewsUpdates: true
+                        }
+                },
+        ]
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}
+
+
+language: “en” 과 locale: “en-US”를 language: ”ko”와 locale: “ko-KR”로 변경합니다. 이후 아래의 명령으로 실행합니다.
+
+> cd MagicMirror
+> npm start
+
+
+날씨 정보를 매직미러에 나오게 합니다.
+
+https://openweathermap.org/ 에 가입합니다. 로그인 후 로그인 아이디 클릭 > My API Keys를 클릭합니다.
+
+설정받은 키를 복사합니다. 그리고, 이링크에서 openweathermap의 우리나라 주소코드를 확인합니다.
+
+부산은 아래의 두개 코드를 사용할 수 있습니다.
+
+1838519        Busan
+1838524        Busan
+
+다시 config.js를 엽니다.
+
+중간의 weather 부분에 지역코드와 API 키를 붙여넣습니다. config 위에
+
+header: "현재날씨"
+header: "날씨예보"
+
+를 추가합니다. 날씨정보도 npm start로 확인해보세요.
+
+
+구글 캘린더 연동
+구글에 진입 위의 로그인 한 뒤 계정 왼쪽의 아이콘을 클릭한 뒤 Calendar를 선택합니다.
+
+
+ 
+
+아이디 왼쪽의 버튼을 클릭한뒤 Settings ans sharing을 클릭합니다.
+
+
+아래의 내용 중에서 Secret address in iCal format의 주소를 확인 복사합니다.
+
+> geany MagicMirror/config/config.js
+
+
+calendar 모듈에서 header를 “US Holiday”에서 “내 캘린더”로
+
+url 에 복사한 주소를 붙여넣습니다. 이제 npm start로 실행해보세요.
+
+
+뉴스 설정
+뉴스 역시 여러 API를 연동할 수 있지만 가장 간단한 구글 뉴스 RSS를 활용하겠습니다.
+
+https://biduck.tistory.com/254 에 가면 국내 사이트 뉴스 RSS가 총망라 되어 있습니다. 여기서 사용할 링크는 https://news.google.com/rss?pz=1&hl=ko&topic=po&gl=KR&ceid=KR:ko 를 사용하면 됩니다.
+
+> geany MagicMirror/config/config.js
+
+지니 에디터로 들어가
+
+newsfeed 모듈에서 title과 url을 변경한 뒤 저장, 실행해봅니다.
+
+
+
+뉴스의 feeds는 배열이므로 여려개의 title과 url을 {} 으로 나누어서 작성할 수 있습니다. 최대 4~5개의 뉴스 feed를 랜덤하게 변경하며 보여줍니다.
+
+신규 모듈 설치
+위의 여러가지 모듈과 같이 필요한 모듈이 있으면 추가할 수 있습니다. 미세먼지 모듈을 추가해봅시다.
+
+> cd ~/MagicMirror/modules
+
+
+> git clone https://github.com/CFenner/MMM-AirQuality
+
+깃헙 리포지토리를 클론합니다.
+
+웹 브라우저를 열고 https://aqicn.org/search 를 입력합니다. 입력한 사이트에서 ‘Enter a city name’에 영문으로 도시명을 입력합니다. 확인된 도시명을 사용할 수 있습니다.
+
+> cd MMM-AirQuality
+> npm install
+
+위의 명령으로 모듈을 설치합니다. 설치완료 후 다시 매직미러 설치파일로 진입합니다.
+
+> geany MagicMirror/config/config.js
+
+아래의 설정구문을 붙여넣습니다.
+
+{
+module: 'MMM-AirQuality',
+position: 'top_left',
+config: {
+ location: 'seoul',
+ lang: "kr"
+}
+},
+
+
+
+
+미세먼지가 추가된것을 볼 수 있습니다.
+
+
+모듈의 위치명은 다음과 같습니다. position의 값을 변경하면 됩니다.
+
+
+
+모듈의 위치 명은 위를 따라 사용하시면 변경가능합니다.
+
+
+스피커와 마이크 설정
+이미 앞선 포스트에서 정리해 두었습니다만 혹시 안되는 경우 처리할 명령어와 설정을 정리해놓습니다.
+
+아래의 aplay 명령으로 스피커 카드번호, 디바이스 번호 확인합니다. 다음의 arecord 명령으로 마이크의 카드 번호, 디바이스 번호를 확인합니다.
+
+> aplay -l
+> arecord -l
+
+
+> sudo nano .asoundrc
+
+위의 명령으로 빈화면이 나오면 정상입니다.
+
+USB 마이크와 3.5mm 스피커의 경우 아래의 설정을 입력합니다.
+
+pcm.!default{
+type asym
+playback.pcm{
+ type hw
+ card 0
+ }
+capture.pcm{
+ type plug
+ slave.pcm "hw:1, 0"
+ }
+}
+ctl.!default{
+type hw
+card 0
+}
+
+
+나머지는 생략합니다.
+
+구글 어시스턴트 설정
+구글 어시스턴트 설정도 유사합니다. 전체 순서는 snowboy 모듈 설치, 구글 어시스턴스 모듈 설치, 토큰 인증, config 수정 순입니다.
+
+
+우선 snowboy를 설치합니다.
+
+> cd ~/MagicMirror/modules/
+> git clone https://github.com/bugsounet/MMM-Snowboy
+> cd MMM-Snowboy
+> npm install
+
+
+다음 구글어시스턴트를 설치합니다.
+
+> cd ~/MagicMirror/modules
+> git clone https://github.com/bugsounet/MMM-GoogleAssistant
+> cd MMM-GoogleAssistant
+> npm install
+
+중간 중간 설치에 대한 질문이 세번 정도 나옵니다. Y를 누르면 설치가 진행됩니다.
+
+aplay -l 로 하드웨어 정보를 찾으면 card 1에 device 0 이, arecord -l로 마이크 정보를 찾으면 card 2에 device 0가 표시되어 있습니다. 이것을 확인해둡니다.
+
+
+이전에 원래 마이크 설정 테스트가 존재했으나 버전이 바뀌며 사라졌습니다.
+
+
+아래의 내용은 굳이 리눅스가 아니더라도 됩니다.
+
+https://console.actions.google.com/ 에 접속합니다.
+
+
+
+이미 예전에 작업하던 프로젝트가 있었습니다. 새로 만들거나 이전 걸 사용합니다. 다시 만들어 보겠습니다.
+
+
+
+
+What kind of Action do you want to build? 화면에서 스크롤을 제일 아래로 내려
+
+
+
+를 클릭합니다. 다음 화면의 REGISTER MODEL 버튼을 클릭합니다.
+
+
+
+위와 같이 설정해줍니다. Device type을 Speaker로 해주는 것은 필수입니다. 다시 REGISTER MODEL을 클릭하면 화면이 Step 2로 변경됩니다, 여기에서 Download OAuth 2.0 credentials를 클릭합니다. *.json 파일을 다운로드 받았습니다. 이 파일을 라즈비안으로 전달한 후,
+
+/home/pi/MagicMirror/modules/MMM-GoogleAssistant 디렉토리에 옮겨줍니다. 다음 파일 이름을 credentials.json으로 변경합니다.
+
+구글 액션 설정화면에서 Step 3는 skip 해도 됩니다.
+
+
+
+위와 같이 모델이 하나 등록됩니다.
+
+
+다음으로 https://console.cloud.google.com/ 에 접속합니다. 조금전에 만든 프로젝트 이름(HugoMagicMirror)을 검색합니다.
+
+좌측 탐색메뉴 - API 및 서비스 - 라이브러리 를 선택합니다. 다음 Google assistant API 검색 하고 사용버튼을 클릭합니다. 이후 나타나는 Google Assistant API 의 좌측메뉴 중 사용자 인증 정보를 클릭합니다.
+
+동의 화면 구성을 클릭합니다. User Type을 외부로 선택하고 만들기 버튼을 클릭합니다.
+
+사용자 지원 이메일을 입력후 저장 후 계속을 클릭합니다.
+
+모두 저장 후 계속을 클릭한 뒤 대시보드로 돌아가기를 클릭합니다.
+
+대시보드에서 테스트 사용자 +ADD USERS 버튼을 클릭합니다. 현재 계정의 이메일을 입력해야 합니다.
+
+ 
+
+이제 라즈비안으로 돌아갑니다. 토큰 인증 작업이 필요합니다.
+
+> cd MagicMirror/modules/MMM-GoogleAssistant
+
+다음에 아래의 명령을 실행합니다.
+
+> npm run tokens
+
+
+Do you want to install/reinstall GoogleAssistant token? 물음에 당연히 Y라고 합니다.
+
+웹 페이지와 연동되면서 구글 계정 로그인 창이 뜹니다. 로그인을 진행합니다. 계속을 누르세요. 그리고 중간의 팝업에 액세스를 허용합니다. 다음에 나타나는 코드를 복사하여 터미널에 붙여넣습니다.
+
+
+몇가지 영역(Google Photo, Youtube 등)에 대하여 계정 설치 처리를 진행합니다. 계속 진행하세요.
+
+설정 완료후
+
+> cd ~
+> geany MagicMirror/config/config.js
+
+설정 파일 하단에 아래의 코드를 붙여줍니다.
+
+                {
+                          module: 'MMM-Snowboy',
+                          configDeepMerge: true,
+                          config: {
+                            debug: false,
+                            autoStart: true,
+                            micConfig: {
+                              recorder: "arecord",
+                              device: "plughw:2",
+                              audioGain: 2.0,
+                              applyFrontend: true,
+                            },
+                            detectors: [
+                              {
+                                Model: "smart_mirror",
+                                Sensitivity: null,
+                                onDetected: {
+                                  notification: "GA_ACTIVATE",
+                                  parameters: null
+                                }
+                              }
+                            ]
+                          }
+                },
+                {
+                        module: "MMM-GoogleAssistant",
+                        position: "top_left",
+                        configDeepMerge: true,
+                        config: {
+                           debug: false,
+                        assistantConfig: {
+                          lang: "ko-KR",
+                          latitude: 35.11,  // 위,경도는 변경합니다.
+                          longitude: 129.09,
+                        },
+                        responseConfig: {
+                              useFullscreen: true,
+                              useResponseOutput: true,
+                              responseOutputCSS:  "response_output.css",
+                              screenOutputTimer: 5000,
+                              activateDelay: 250,
+                              useAudioOutput: true,
+                              useChime: true,
+                              confirmationChime: true,
+                              useInformations: true
+                        },
+                        micConfig: {
+                          recorder: "arecord",
+                          device: "plughw:2",
+                        },
+                            NPMCheck: {
+                              useChecker: false,
+                              delay: 10 * 60 * 1000,
+                              useAlert: false
+                         },
+ }
+},
+
+
+snowboy에서 지원가능한 모델은 smart_mirror, jarvis, computer, snowboy, subex, neo_ya, hey_extreme, view_glass, alexa 등이 있습니다. 현재는 smart_mirror로 지정했습니다.
+
+
+npm start로 실행하여 결과를 확인해봅니다.
+
+
+
+
+
+
+구글포트 연동
+https://console.actions.google.com/ 에 접속합니다.
+
+new project 선택하고, 맨 하단 Device registration 선택, 내용 입력 후, type은 scene으로 선택합니다. OAuth 2.0 credentials 파일을 다운받아 라즈베리파이에 복사(xrdp 혹은 USB 메모리 이용)합니다. 다음단계는 skip.
+
+https://console.cloud.google.com/ 에 접속합니다.
+
+좌측 탐색메뉴 > API 및 서비스 > 라이브러리 를 선택하고, photos library API 검색하여 사용을 클릭합니다. 좌측 사용자 인증 정보 > 동의 화면 구성 클릭. 외부 - 만들기
+
+하단 중단 지원 email과 개발자 연락처 정보에 email 적고 저장 후 계속합니다. 계속 넘긴 후 대시보드에서 테스트 사용자를 추가합니다. 이메일은 동일하게 넣습니다.
+
+
+이제 전자액자 모듈을 설치합니다.
+
+> cd MagicMirror/modules
+> git clone https://github.com/aneaville/MMM-GooglePhotos
+> cd MMM-GooglePhotos
+> npm install
+
+다운받은 파일을 MMM-GooglePhotos 폴더에 옮겨주고 이름을 credentials.json 으로 바꿔줍니다.
+
+> cd ~/MagicMirror/modules/MMM-GooglePhotos
+> node generate_token.js
+
+인터넷 창이 뜨면 로그인을 합니다. 이후 계속 - 허용 - 허용 눌러준 뒤 화면에 나타난 암호코드를 복사해서 Ctrl + Shift + v 로 붙여줍니다.
+
+
+> cd ~
+> geany MagicMirror/config/config.js
+
+
+{
+ module: "MMM-GooglePhotos",
+ position: "fullscreen_below",
+ config: {
+                albums: ["앨범"], // 앨범이름을 정확히 써주세요. 예시: ["wedding", "Travle to Paris"]
+                updateInterval: 20, // 사진 바꿔주는 시간(최소 10초)
+                sort: "random", // "old", "random" 보여주는 순서
+                uploadAlbum: null, // Only album created by `create_uploadable_album.js`.
+                condition: {
+                        fromDate: null, // Or "2018-03", RFC ... format available
+                        toDate: null, // Or "2019-12-25",
+                        minWidth: null, // Or 400
+                        maxWidth: null, // Or 8000
+                        minHeight: null, // Or 400
+                        maxHeight: null, // Or 8000
+                        minWHRatio: null,
+                        maxWHRatio: null,
+                        // WHRatio = Width/Height ratio ( ==1 : Squared Photo,   < 1 : Portraited Photo, > 1 : Landscaped Photo)
+                },
+                showWidth: 1080, // These values will be used for quality of downloaded photos to show. real size to show in your MagicMirror region is recommended.
+                showHeight: 1920,
+                timeFormat: "YYYY/MM/DD HH:mm", // Or `relative` can be used.
+ }
+},
+
+
+구글 포토앨범에 사진이 많으면 로딩하는데 상당한 시간이 걸립니다.
+
+디스플레이에 문제가 있다면,
+
+> cd MagicMirror/css
+
+> geany custom.css
+
+이제 아래를 추가합니다.
+
+/*
+우측 하단 사진정보를 없애려면 바로 아래 주석 해제
+*/
+/*
+#GPHOTO_INFO {
+display:none;
+}
+*/
+/*
+배경을 검게하려면 바로 아래 주석 해제
+*/
+/*
+#GPHOTO_BACK {  
+display:none;
+}
+*/
+/*
+시계를 잘보이게 하려면 바로 아래 주석 해제
+*/
+/*
+.clock {  
+ padding: 10px;
+background-color: rgba(0, 0, 0, 0.5);
+}
+*/
+
+
+일단 잘 안됩니다. 현재까진…
+
+인체감지센서 설정
+3.3v 전압으로 동작합니다. 센서의 감도조절 나사는 모두 최소한도로 시작 후 변경할 것을 권장합니다.
+
+인체감지센서의 OUT은 GPIO의 22번에 연결합니다.
+
+> cd MagicMirror/modules
+> git clone https://github.com/paviro/MMM-PIR-Sensor
+> cd MMM-PIR-Sensor
+> npm install
+> sudo usermod -a -G gpio pi
+> sudo chmod u+s /opt/vc/bin/tvservice && sudo chmod u+s /bin/chvt
+> sudo reboot 으로 재부팅
+> geany MagicMirror/config/config.js
+
+
+{
+module: 'MMM-PIR-Sensor',
+position: "top_center", // 빨간점이 보기 싫으시면 이줄을 지워주세요
+config: {
+ sensorPin: 22,
+ powerSavingDelay: 60, // 60초간 움직임이 없으면 화면이 꺼집니다
+ preventHDMITimeout: 4, // 4분마다 모니터를 한번씩 켜서 절전모드를 방지합니다
+}
+}
+
+
+하프미러는 아크릴과 하프미러 필름으로 작업하시면 됩니다.
+
+
