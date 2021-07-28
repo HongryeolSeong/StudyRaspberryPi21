@@ -1,0 +1,34 @@
+// 소리 키우기
+>>> alsamixer
+F2 -> bcm2835 Headphones 선택 후 빨간색 전까지 올릴 것
+
+// 구글 포토 연동
+설치순서.txt 564줄 부터
+>>> node generate_token.js 후
+4/1AX4XfWiUI6axA3VFuAye6LEeo4ndlDxd1idqYU5t5jtSp3h6V4W5g5JXQOo 붙여넣기
+앨범이름 수정 및 날짜 null로
+
+// 날씨 모듈 변경
+http://wiki.bugsounet.fr/en/MMM-Weather
+
+// GABackground
+http://wiki.bugsounet.fr/en/MMM-GABackground
+
+// compliements 수정
+
+// 폰트 변경
+https://fonts.google.com/specimen/Nanum+Brush+Script?subset=korean#standard-styles
+css/main.css
+.newfont {
+  font-size: 80px;
+  font-family: 'Nanum Brush Script'
+}
+
+index.html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+
+modules/default/compliments/compliments.js
+163라인
+wrapper.className = this.config.classes ? this.config.classes : "thin xlarge bright pre-line newfont";
