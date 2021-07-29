@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from numpy.core.defchararray import center
 
-org = cv2.imread('./0719/puppy.jpg', cv2.IMREAD_GRAYSCALE)        # 이미지 로드
+org = cv2.imread('./0719_20_21/puppy.jpg', cv2.IMREAD_GRAYSCALE)        # 이미지 로드
 dst = cv2.resize(org, dsize=(640, 480))
 
 # 도형 그리기
