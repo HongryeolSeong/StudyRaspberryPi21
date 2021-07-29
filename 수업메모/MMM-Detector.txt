@@ -1,0 +1,83 @@
+﻿구글 어시스턴트 설정
+구글 어시스턴트 설정도 유사합니다. 전체 순서는 snowboy 모듈 설치, 구글 어시스턴스 모듈 설치, 토큰 인증, config 수정 순입니다.
+
+
+SnowBoy 모듈이 더이상 존재하지 않습니다. 따라서 MMM-Detector로 변경해봅니다.
+> cd ~/MagicMirror/modules
+> git clone https://github.com/bugsounet/MMM-Detector
+
+
+> cd MMM-Detector
+> npm install
+
+
+
+
+아래는 MMM-Detector 설정입니다.
+        {
+                        module: "MMM-Detector",
+                        position: "top_left",
+                        configDeepMerge: true,
+                        config: {
+                                debug: false,
+                                autoStart: true,
+                                useLogos: true,
+                                micConfig: {
+                                        recorder: "auto",
+                                        device: "default",
+                                        // only for snowboy:
+                                        audioGain: 2.0,
+                                        applyFrontend: true // When you use only `snowboy` and `smart_mirror`, `false` is better. But with other models, `true` is better.
+                                },
+                                newLogos: {
+                                        default: "default.png"
+                                },
+                                detectors: [
+                                        {
+                                                detector: "Snowboy",
+                                                Model: "jarvis",
+                                                Sensitivity: null,
+                                                Logo: "google",
+                                                autoRestart: false,
+                                                onDetected: {
+                                                        notification: "GA_ACTIVATE"
+                                                }
+                                        },
+                                        {
+                                                detector: "Snowboy",
+                                                Model: "alexa",
+                                                Sensitivity: null,
+                                                Logo: "alexa",
+                                                autoRestart: false,
+                                                onDetected: {
+                                                        notification: "ALEXA_ACTIVATE"
+                                                }
+                                        },
+                                        {
+                                                detector: "Porcupine",
+                                                Model: "ok google",
+                                                Sensitivity: null,
+                                                Logo: "google",
+                                                autoRestart: false,
+                                                onDetected: {
+                                                        notification: "GA_ACTIVATE"
+                                                }
+                                        },
+                                        {
+                                                detector: "Porcupine",
+                                                Model: "hey google",
+                                                Sensitivity: null,
+                                                Logo: "google",
+                                                autoRestart: false,
+                                                onDetected: {
+                                                        notification: "GA_ACTIVATE"
+                                                }
+                                        }
+                                ],
+                                NPMCheck: {
+                                        useChecker: true,
+                                        delay: 10 * 60 * 1000,
+                                        useAlert: true
+                                }
+                        }
+                }

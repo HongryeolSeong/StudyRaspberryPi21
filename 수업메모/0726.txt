@@ -1,0 +1,215 @@
+스마트미러 설치순서.txt 참고
+
+// 날씨 추가
+5b06cb34eee444a50b17cc3a4d7190b6
+
+// 캘린더 추가
+https://calendar.google.com/calendar/ical/ghd0276%40gmail.com/private-5a3088e6081e70a4f3afed6511352bfd/basic.ics
+
+// 뉴스 추가
+https://news.google.com/rss?pz=1&hl=ko&topic=po&gl=KR&ceid=KR:ko
+
+// 미세먼지 추가
+반드시 modules 폴더에 들어갈 것
+
+// 구글 어시스턴스
+MMM-Detector.txt 참고
+
+코드
+/* Magic Mirror Config Sample
+ *
+ * By Michael Teeuw https://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information on how you can configure this file
+ * see https://docs.magicmirror.builders/getting-started/configuration.html#general
+ * and https://docs.magicmirror.builders/modules/configuration.html
+ */
+let config = {
+	address: "localhost", 	// Address to listen on, can be:
+							// - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+							// - another specific IPv4/6 to listen on a specific interface
+							// - "0.0.0.0", "::" to listen on any interface
+							// Default, when address config is left out or empty, is "localhost"
+	port: 8080,
+	basePath: "/", 	// The URL path where MagicMirror is hosted. If you are using a Reverse proxy
+					// you must set the sub path here. basePath must end with a /
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], 	// Set [] to allow all IP addresses
+															// or add a specific IPv4 of 192.168.1.5 :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+															// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	useHttps: false, 		// Support HTTPS or not, default "false" will use HTTP
+	httpsPrivateKey: "", 	// HTTPS private key path, only require when useHttps is true
+	httpsCertificate: "", 	// HTTPS Certificate path, only require when useHttps is true
+
+	language: "ko",
+	locale: "ko-KR",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+	timeFormat: 24,
+	units: "metric",
+	// serverOnly:  true/false/"local" ,
+	// local for armv6l processors, default
+	//   starts serveronly and then starts chrome browser
+	// false, default for all NON-armv6l devices
+	// true, force serveronly mode, because you want to.. no UI on this device
+
+	modules: [
+		{
+			module: "alert",
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		{
+			module: "clock",
+			position: "top_left"
+		},
+		{
+			module: "calendar",
+			header: "내 캘린더",
+			position: "top_left",
+			config: {
+				calendars: [
+					{
+						symbol: "calendar-check",
+						url: "https://calendar.google.com/calendar/ical/ghd0276%40gmail.com/private-5a3088e6081e70a4f3afed6511352bfd/basic.ics"}
+				]
+			}
+		},
+		{
+			module: "compliments",
+			position: "lower_third"
+		},
+		{
+			module: "weather",
+			position: "top_right",
+			header: "현재날씨",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "current",
+				location: "Busan",
+				locationID: "1838519", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "5b06cb34eee444a50b17cc3a4d7190b6"
+			}
+		},
+		{
+			module: "weather",
+			position: "top_right",
+			header: "날씨예보",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "forecast",
+				location: "Busan",
+				locationID: "1838519", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "5b06cb34eee444a50b17cc3a4d7190b6"
+			}
+		},
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			config: {
+				feeds: [
+					{
+						title: "구글 뉴스",
+						url: "https://news.google.com/rss?pz=1&hl=ko&topic=po&gl=KR&ceid=KR:ko"
+					}
+				],
+				showSourceTitle: true,
+				showPublishDate: true,
+				broadcastNewsFeeds: true,
+				broadcastNewsUpdates: true
+			}
+		},
+		/* MMM-AirQualtiy Start */
+		{
+			module: 'MMM-AirQuality',
+			position: 'top_left',
+			header: "미세먼지",
+			config: {
+				 location: 'busan',
+				 lang: "kr"
+			}
+		},
+		/* MMM-AirQualtiy End */
+		/* MMM-Detector Start */
+		{
+			module: "MMM-Detector",
+			position: "top_left",
+			configDeepMerge: true,
+			config: {
+				debug: false,
+				autoStart: true,
+				useLogos: true,
+				micConfig: {
+					recorder: "auto",
+					device: "default",
+					// only for snowboy:
+					audioGain: 2.0,
+					applyFrontend: true // When you use only `snowboy` and `smart_mirror`, `false` is better. But with other models, `true` is better.
+				},
+				newLogos: {
+					default: "default.png"
+				},
+				detectors: [
+					{
+						detector: "Snowboy",
+						Model: "jarvis",
+						Sensitivity: null,
+						Logo: "google",
+						autoRestart: false,
+						onDetected: {
+							notification: "GA_ACTIVATE"
+						}
+					}
+				],
+				NPMCheck: {
+					useChecker: true,
+					delay: 10 * 60 * 1000,
+					useAlert: true
+				}
+			}
+		},
+		/* MMM-Detector End */
+		/* MMM-GoogleAssistant Start */
+		{
+			module: "MMM-GoogleAssistant",
+			position: "top_left",
+			configDeepMerge: true,
+			config: {
+				debug: false,
+				assistantConfig: {
+					lang: "ko-KR",
+					latitude: 35.117562,  // 위,경도는 변경합니다.
+					longitude: 129.090558,
+				},
+				responseConfig: {
+					useFullscreen: true,
+					useResponseOutput: true,
+					responseOutputCSS:  "response_output.css",
+					screenOutputTimer: 5000,
+					activateDelay: 250,
+					useAudioOutput: true,
+					useChime: true,
+					confirmationChime: true,
+					useInformations: true
+				},
+				micConfig: {
+					recorder: "arecord",
+					device: "default",
+				},
+				NPMCheck: {
+					useChecker: false,
+					delay: 10 * 60 * 1000,
+					useAlert: false
+				},
+			}
+		}
+		/* MMM-GoogleAssistant End */
+	]
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}
