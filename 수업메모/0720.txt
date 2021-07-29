@@ -21,7 +21,7 @@ ex)opencv_img06.py
 // 영상 처리
 기본 틀
 ex)opencv_mov01.py
-
+ 
 흑백화
 ex)opencv_mov02.py
 
