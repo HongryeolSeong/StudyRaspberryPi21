@@ -8,7 +8,7 @@ F2 -> bcm2835 Headphones 선택 후 빨간색 전까지 올릴 것
 4/1AX4XfWiUI6axA3VFuAye6LEeo4ndlDxd1idqYU5t5jtSp3h6V4W5g5JXQOo 붙여넣기
 앨범이름 수정 및 날짜 null로
 
-// 날씨 모듈 변경
+// 날씨 모듈 변경 
 http://wiki.bugsounet.fr/en/MMM-Weather
 
 // GABackground
