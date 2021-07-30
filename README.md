@@ -126,3 +126,7 @@ get방식+상태입력 LED점멸
 post방식+버튼입력 LED점멸   
 [test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/0526/appLedTestButton.py "20")
 <br>
+
+## OpenCV 🎯
+[OpenCV 👈 ](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/OpenCV)
+<br/>
