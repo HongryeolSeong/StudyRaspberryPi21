@@ -3,17 +3,17 @@ import numpy as np
 import datetime
 from PIL import ImageFont, ImageDraw, Image
 
-# 카메라 기본 틀
 # 영상에 글자 출력
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 # 나눔고딕볼드 불러오기
-font = ImageFont.truetype('./0719_20/fonts/NanumGothicBold.ttf', 20)
+font = ImageFont.truetype('./0719_20_21/fonts/NanumGothicBold.ttf', 20)
 
 while True:
     ret, frame = cap.read()
+    frame = cv2.flip(frame, 0)
     h, _, _ = frame.shape   # Width, Channel은 필요없는 경우
     now = datetime.datetime.now()
     currDateTime = now.strftime('%Y-%m-%d %H:%M:%S')

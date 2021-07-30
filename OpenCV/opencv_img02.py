@@ -3,7 +3,7 @@ import numpy as np      # C#의 리스트, 행렬이 포함되어 있지 않기 
 
 # 이미지 로드 기본틀
 #org = cv2.imread('./0719_20/puppy.jpg', cv2.IMREAD_GRAYSCALE)            # 흑백으로 로드
-org = cv2.imread('./0719_20/puppy.jpg', cv2.IMREAD_REDUCED_COLOR_2)   # 흑백으로 로드(절반 사이즈)
+org = cv2.imread('./0719_20_21/puppy.jpg', cv2.IMREAD_REDUCED_COLOR_2)   # 흑백으로 로드(절반 사이즈)
 gray = cv2.cvtColor(org, cv2.COLOR_BGR2GRAY)
 
 h, w, c = org.shape

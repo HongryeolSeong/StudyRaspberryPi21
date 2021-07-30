@@ -3,7 +3,7 @@ import numpy as np
 import datetime
 from PIL import ImageFont, ImageDraw, Image
 
-## 함수 선언영역
+## 함수 선언 영역
 ## 영상 간의 차이나는 부분 표시이미지, 차이나는 픽셀 객수를 리턴하는 함수
 def get_diff_image(frame_a, frame_b, frame_c, threshold):
     # 세 개의 모든 프레임을 회식으로 전환
@@ -29,11 +29,10 @@ def get_diff_image(frame_a, frame_b, frame_c, threshold):
 
     return diff, diff_cnt
 
-# 카메라 기본 틀
 # 움직임 발생시 화면 캡쳐
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 480)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
 # 나눔고딕볼드 불러오기
 font = ImageFont.truetype('./0719_20/fonts/NanumGothicBold.ttf', 20)
@@ -56,6 +55,7 @@ while True:
 
     # 현재영상 입력
     ret, frame = cap.read()
+    frame = cv2.flip(frame, 0)
     h, w, _ = frame.shape   # Width, Channel은 필요없는 경우
     
     if ret != True: break
@@ -84,7 +84,8 @@ while True:
     key = cv2.waitKey(1)
     if key == ord('q'): break
 
-    cv2.imshow('RealTime CAM', frame)   # 원본
+    # 원본 출력
+    cv2.imshow('RealTime CAM', frame)
 
 cap.release()
 cv2.destroyAllWindows()
