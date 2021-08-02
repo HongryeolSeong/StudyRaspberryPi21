@@ -3,10 +3,10 @@ import sys
 import time
 
 
-pin1 = 23
-pin2 = 24
-pin3 = 20
-pin4 = 21
+pin1 = 20
+pin2 = 21
+pin3 = 6
+pin4 = 12
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin1, GPIO.OUT)
