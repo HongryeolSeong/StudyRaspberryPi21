@@ -19,19 +19,19 @@ GPIO.setup(mpin4, GPIO.OUT)
 try:
     while True:
         if GPIO.input(pin) == True:
-            #print("White")
+            print("White")
             GPIO.output(mpin1, False)
             GPIO.output(mpin2, False)
             GPIO.output(mpin3, False)
             GPIO.output(mpin4, False)
-            #time.sleep(0.3)
+            time.sleep(0.3)
         elif GPIO.input(pin) == False:
-            #print("Black")
+            print("Black")
             GPIO.output(mpin1, True)
             GPIO.output(mpin2, False)
             GPIO.output(mpin3, True)
             GPIO.output(mpin4, False)
-            #time.sleep(0.3)
+            time.sleep(0.3)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
