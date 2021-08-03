@@ -3,11 +3,11 @@ import sys
 import time
 
 
-pin = 18
-mpin1 = 20
-mpin2 = 21
-mpin3 = 6
-mpin4 = 12
+pin = 18        # 라인 근접 센서
+mpin1 = 20      # 앞 왼 바퀴1
+mpin2 = 21      # 앞 왼 바퀴2
+mpin3 = 6       # 앞 오 바퀴1
+mpin4 = 12      # 앞 오 바퀴2
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN)
