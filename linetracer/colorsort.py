@@ -29,8 +29,8 @@ try:
             print("Black")
             GPIO.output(mpin1, True)
             GPIO.output(mpin2, False)
-            GPIO.output(mpin3, True)
-            GPIO.output(mpin4, False)
+            GPIO.output(mpin3, False)
+            GPIO.output(mpin4, True)
             time.sleep(0.3)
 
 except KeyboardInterrupt:
