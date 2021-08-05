@@ -6,16 +6,13 @@ import signal
 import os
 import time
 
-# event_stop = threading.Event()
-# event_pause = threading.Event()
-# event_stop.clear()
-# event_pause.clear()
-
-pin = 18        # 라인 근접 센서
+pin = 4        # 라인 근접 센서
 mpin1 = 20      # 앞 왼 바퀴1
 mpin2 = 21      # 앞 왼 바퀴2
 mpin3 = 6       # 앞 오 바퀴1
 mpin4 = 12      # 앞 오 바퀴2
+ena = 17        # 앞 왼 바퀴 enable 입력
+enb = 18        # 앞 오 바퀴 enable 입력
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN)
@@ -23,44 +20,57 @@ GPIO.setup(mpin1, GPIO.OUT)
 GPIO.setup(mpin2, GPIO.OUT)
 GPIO.setup(mpin3, GPIO.OUT)
 GPIO.setup(mpin4, GPIO.OUT)
+GPIO.setup(ena, GPIO.OUT)
+GPIO.setup(enb, GPIO.OUT)
 
-m1 = GPIO.PWM(mpin1, 100)
-m2 = GPIO.PWM(mpin2, 100)
-m3 = GPIO.PWM(mpin3, 100)
-m4 = GPIO.PWM(mpin4, 100)
+pa = GPIO.PWM(ena, 100)
+pb = GPIO.PWM(enb, 100)
+pa.start(100)
+pb.start(100)
 
 GPIO.output(mpin1, False)
 GPIO.output(mpin2, False)
 GPIO.output(mpin3, False)
 GPIO.output(mpin4, False)
 
+def setOg():
+    pa.ChangeDutyCycle(100)
+    pb.ChangeDutyCycle(100)
+
 def set_left():
+    pa.ChangeDutyCycle(96)
+    GPIO.output(mpin1, True)
+    GPIO.output(mpin2, False)
+    GPIO.output(mpin3, False)
+    GPIO.output(mpin4, True)
+
+def set_right():
+    pb.ChangeDutyCycle(96)
+    GPIO.output(mpin1, False)
+    GPIO.output(mpin2, True)
+    GPIO.output(mpin3, True)
+    GPIO.output(mpin4, False)
+
+def set_start():
+    setOg()
     GPIO.output(mpin1, False)
     GPIO.output(mpin2, True)
     GPIO.output(mpin3, False)
     GPIO.output(mpin4, True)
 
-def set_right():
+def set_back():
+    setOg()
     GPIO.output(mpin1, True)
     GPIO.output(mpin2, False)
     GPIO.output(mpin3, True)
     GPIO.output(mpin4, False)
 
-def set_start():
-    GPIO.output(mpin1, True)
-    GPIO.output(mpin2, False)
-    GPIO.output(mpin3, False)
-    GPIO.output(mpin4, True)
-
 def stop():
+    setOg()
     GPIO.output(mpin1, False)
     GPIO.output(mpin2, False)
     GPIO.output(mpin3, False)
     GPIO.output(mpin4, False)
-
-# def setSpeed(speed, p1, p2):
-#     p1.ChangeDutyCycle(speed*10)
-#     p2.ChangeDutyCycle(speed*10)
 
 def on_message(client, userdata, message):
     topic=str(message.topic)
@@ -69,6 +79,8 @@ def on_message(client, userdata, message):
 
     if message == 's':
         set_start()
+    elif message == 'b':
+        set_back()
     elif message == 't':
         stop()
     elif message == 'l':
@@ -89,9 +101,21 @@ client.subscribe(pub_topic)
 # client.on_disconnect = on_disconnect
 client.on_message = on_message
 
+
 try:
+    # while True:
+    #     client.loop_forever()
+    #GPIO.add_event_detect(pin, GPIO.FALLING, callback=client.loop_forever())
     while True:
-        client.loop_forever()
+        if GPIO.input(pin) == False:
+            print('path')
+            if GPIO.input(pin) == True:
+                break
+            client.loop_forever()
+        elif GPIO.input(pin) == True:
+            print('no path')
+            stop()
+
 
 except KeyboardInterrupt:
     GPIO.cleanup()
