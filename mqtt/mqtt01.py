@@ -12,7 +12,7 @@ mpin2 = 21      # 앞 왼 바퀴2
 mpin3 = 6       # 앞 오 바퀴1
 mpin4 = 12      # 앞 오 바퀴2
 ena = 17        # 앞 왼 바퀴 enable 입력
-enb = 18        # 앞 오 바퀴 enable 입력
+enb = 18        # 앞 오 바퀴 enable 입력 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN)
