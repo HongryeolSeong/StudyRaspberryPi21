@@ -94,77 +94,11 @@ def set_right():
     GPIO.output(mpin7, False)
     GPIO.output(mpin8, True)
 
-def set_start(event_stop, event_pause):
+def set_start():
     while True:
-        if event_stop.is_set():
-                event_stop.clear()
-                break
-        # elif event_pause.is_set():
-        #     while(1):
-        #         print('--pause--')
-        #         if event_pause.is_set() == False:
-        #             break
-        #         time.sleep(1)
-        elif (GPIO.input(pin) == False) and (GPIO.input(pin2) == False):
-            #print("no path")
-            setOg()
-            GPIO.output(mpin1, False)
-            GPIO.output(mpin2, False)
-            GPIO.output(mpin3, False)
-            GPIO.output(mpin4, False)
-            GPIO.output(mpin5, False)
-            GPIO.output(mpin6, False)
-            GPIO.output(mpin7, False)
-            GPIO.output(mpin8, False)
-            time.sleep(0.00001)
-        elif (GPIO.input(pin) == True) and (GPIO.input(pin2) == True):
-            #print("path")
-            setOg()
-            GPIO.output(mpin1, False)
-            GPIO.output(mpin2, True)
-            GPIO.output(mpin3, False)
-            GPIO.output(mpin4, True)
-            GPIO.output(mpin5, False)
-            GPIO.output(mpin6, True)
-            GPIO.output(mpin7, True)
-            GPIO.output(mpin8, False)
-            time.sleep(0.00001)
-        elif (GPIO.input(pin) == False) and (GPIO.input(pin2) == True):
-            #print("right")
-            pa.ChangeDutyCycle(100)
-            pb.ChangeDutyCycle(100)
-            pc.ChangeDutyCycle(100)
-            pd.ChangeDutyCycle(100)
-            GPIO.output(mpin1, False)
-            GPIO.output(mpin2, True)
-            GPIO.output(mpin3, True)
-            GPIO.output(mpin4, False)
-            GPIO.output(mpin5, False)
-            GPIO.output(mpin6, True)
-            GPIO.output(mpin7, False)
-            GPIO.output(mpin8, True)
-            time.sleep(0.00001)
-        elif (GPIO.input(pin) == True) and (GPIO.input(pin2) == False):
-            #print("left")
-            pa.ChangeDutyCycle(100)
-            pb.ChangeDutyCycle(100)
-            pd.ChangeDutyCycle(100)
-            pc.ChangeDutyCycle(100)
-            GPIO.output(mpin1, True)
-            GPIO.output(mpin2, False)
-            GPIO.output(mpin3, False)
-            GPIO.output(mpin4, True)
-            GPIO.output(mpin5, True)
-            GPIO.output(mpin6, False)
-            GPIO.output(mpin7, True)
-            GPIO.output(mpin8, False)
-            time.sleep(0.00001)
-
-def set_back(event_stop, event_pause):
-    while True:
-        if event_stop.is_set():
-                event_stop.clear()
-                break
+        # if event_stop.is_set():
+        #         event_stop.clear()
+        #         break
         # elif event_pause.is_set():
         #     while(1):
         #         print('--pause--')
@@ -182,18 +116,19 @@ def set_back(event_stop, event_pause):
             GPIO.output(mpin6, False)
             GPIO.output(mpin7, False)
             GPIO.output(mpin8, False)
-            time.sleep(0.00001)
+            #time.sleep(0.00001)
+            break
         elif (GPIO.input(pin) == True) and (GPIO.input(pin2) == True):
             #print("path")
             setOg()
-            GPIO.output(mpin1, True)
-            GPIO.output(mpin2, False)
-            GPIO.output(mpin3, True)
-            GPIO.output(mpin4, False)
-            GPIO.output(mpin5, True)
-            GPIO.output(mpin6, False)
-            GPIO.output(mpin7, False)
-            GPIO.output(mpin8, True)
+            GPIO.output(mpin1, False)
+            GPIO.output(mpin2, True)
+            GPIO.output(mpin3, False)
+            GPIO.output(mpin4, True)
+            GPIO.output(mpin5, False)
+            GPIO.output(mpin6, True)
+            GPIO.output(mpin7, True)
+            GPIO.output(mpin8, False)
             time.sleep(0.00001)
         elif (GPIO.input(pin) == False) and (GPIO.input(pin2) == True):
             #print("right")
@@ -201,21 +136,6 @@ def set_back(event_stop, event_pause):
             pb.ChangeDutyCycle(100)
             pc.ChangeDutyCycle(100)
             pd.ChangeDutyCycle(100)
-            GPIO.output(mpin1, True)
-            GPIO.output(mpin2, False)
-            GPIO.output(mpin3, False)
-            GPIO.output(mpin4, True)
-            GPIO.output(mpin5, True)
-            GPIO.output(mpin6, False)
-            GPIO.output(mpin7, True)
-            GPIO.output(mpin8, False)
-            time.sleep(0.00001)
-        elif (GPIO.input(pin) == True) and (GPIO.input(pin2) == False):
-            #print("left")
-            pa.ChangeDutyCycle(100)
-            pb.ChangeDutyCycle(100)
-            pd.ChangeDutyCycle(100)
-            pc.ChangeDutyCycle(100)
             GPIO.output(mpin1, False)
             GPIO.output(mpin2, True)
             GPIO.output(mpin3, True)
@@ -225,23 +145,44 @@ def set_back(event_stop, event_pause):
             GPIO.output(mpin7, False)
             GPIO.output(mpin8, True)
             time.sleep(0.00001)
+        elif (GPIO.input(pin) == True) and (GPIO.input(pin2) == False):
+            #print("left")
+            pa.ChangeDutyCycle(100)
+            pb.ChangeDutyCycle(100)
+            pd.ChangeDutyCycle(100)
+            pc.ChangeDutyCycle(100)
+            GPIO.output(mpin1, True)
+            GPIO.output(mpin2, False)
+            GPIO.output(mpin3, False)
+            GPIO.output(mpin4, True)
+            GPIO.output(mpin5, True)
+            GPIO.output(mpin6, False)
+            GPIO.output(mpin7, True)
+            GPIO.output(mpin8, False)
+            time.sleep(0.00001)
 
-def temp_back():
-    pa.ChangeDutyCycle(40)
-    pb.ChangeDutyCycle(40)
-    pc.ChangeDutyCycle(40)
-    pd.ChangeDutyCycle(40)
-    GPIO.output(mpin1, True)
-    GPIO.output(mpin2, False)
-    GPIO.output(mpin3, True)
-    GPIO.output(mpin4, False)
-    GPIO.output(mpin5, True)
-    GPIO.output(mpin6, False)
-    GPIO.output(mpin7, False)
-    GPIO.output(mpin8, True)
-    time.sleep(0.5)
-    return
-
+def set_back():
+    while True:
+        # if event_stop.is_set():
+        #         event_stop.clear()
+        #         break
+        if (GPIO.input(pin) == True) and (GPIO.input(pin2) == True):
+            set_start()
+        elif (GPIO.input(pin) == False) or (GPIO.input(pin2) == False):
+            pa.ChangeDutyCycle(100)
+            pb.ChangeDutyCycle(100)
+            pd.ChangeDutyCycle(100)
+            pc.ChangeDutyCycle(100)
+            GPIO.output(mpin1, True)
+            GPIO.output(mpin2, False)
+            GPIO.output(mpin3, False)
+            GPIO.output(mpin4, True)
+            GPIO.output(mpin5, True)
+            GPIO.output(mpin6, False)
+            GPIO.output(mpin7, True)
+            GPIO.output(mpin8, False)
+            time.sleep(0.001)
+        
 def stop():
     event_stop.set()
     setOg()
@@ -266,12 +207,9 @@ def on_message(client, userdata, message):
     print(topic+message)
 
     if message == 's':
-        thread = threading.Thread(target=set_start, args=(event_stop, event_pause, ))
-        thread.start()
+        set_start()
     elif message == 'b':
-        temp_back()
-        thread = threading.Thread(target=set_back, args=(event_stop, event_pause, ))
-        thread.start()
+        set_back()
     elif message == 't':
         stop()
     elif message == 'p':
