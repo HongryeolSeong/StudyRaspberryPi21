@@ -13,5 +13,5 @@ Raspberry Pi Study Repository
 <br/>
 
 ## RC Car Linetrace 🎯
-[Linetrace 👈 ](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/linetrace)
+[Linetrace 👈 ](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Linetrace)
 <br/>
