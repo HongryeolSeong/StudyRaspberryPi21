@@ -1,4 +1,9 @@
-## WiringPi 라이브러리 활용한 LED 점멸 테스트🎯
+# OpenCV
+IoT 개발자 과정을 통해 학습한 OpenCV 학습 내용입니다.
+<br/>
+<br/>
+
+## WiringPi 라이브러리 활용한 LED 점멸 테스트
 
 LEDx1_0.5초 간격으로 점멸   
 [test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/sensorcontrol/0521/gpio_test.c "1")
@@ -14,7 +19,7 @@ LEDx1_1초 간격으로 점멸 파이썬.ver
 <br>
 <br>
 
-## 스위치 사용한 LED 점멸 테스트 파이썬.ver 🎯
+## 스위치 사용한 LED 점멸 테스트 파이썬.ver
 
 SWITCHx1_스위치누름에 따라 프린트문 출력   
 [test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/sensorcontrol/0524/sw1.py "4")
@@ -30,7 +35,7 @@ SWITCHx1_한 스위치로 LED 켜고 끄기
 <br>
 <br>
 
-## Interrupt + 내부 풀 다운 파이썬.ver 🎯
+## Interrupt + 내부 풀 다운 파이썬.ver
 
 
 * 폴링 : 절차적으로 프로그램 실행   
@@ -54,7 +59,7 @@ Both : 변화기간의 중간
 <br>
 <br>
 
-## PWM 파이썬.ver 🎯
+## PWM 파이썬.ver
 
 * 입력을 주는 시간(duty)에 따라 전체 입력량 조절   
 <br>
@@ -85,7 +90,7 @@ PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)
 <br>
 <br>
 
-## 초음파센서 회로 파이썬.ver 🎯
+## 초음파센서 회로 파이썬.ver
 
 * 트리거 : 신호 발생   
   에코 : 반사된 신호 수신   
@@ -99,7 +104,7 @@ PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)
 <br>
 <br>
 
-## Flask라이브러리 활용한 웹제어 LED 파이썬.ver 🎯
+## Flask라이브러리 활용한 웹제어 LED 파이썬.ver
 
 Flask로 기본 웹 생성   
 [test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/sensorcontrol/0526/flasktest.py "16")
