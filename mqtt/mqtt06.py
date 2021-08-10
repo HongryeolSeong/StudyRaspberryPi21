@@ -70,7 +70,7 @@ pd.start(40)
 
 h = 100
 r = 40
-sec = 0.01
+sec = 0.00001
 
 def ultra():
     while True:
@@ -136,7 +136,7 @@ def set_start():
         #             break
         #         time.sleep(1)
         distance = ultra()
-        if distance < 10:
+        if distance < 60:
             stop()
         elif (GPIO.input(pin) == False) and (GPIO.input(pin2) == False):
             #print("no path")
