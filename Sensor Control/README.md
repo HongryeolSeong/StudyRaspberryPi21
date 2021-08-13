@@ -10,11 +10,11 @@ LEDx1_0.5초 간격으로 점멸
 <br>
 
 LEDx2_0.5초 간격으로 점멸   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0521/gpio_test2.c "2")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0521/gpio_test2.c "2")
 <br>
 
 LEDx1_1초 간격으로 점멸 파이썬.ver   
-[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0521/gpio_test3.py "3")
+[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0521/gpio_test3.py "3")
 <br>
 <br>
 <br>
@@ -22,15 +22,15 @@ LEDx1_1초 간격으로 점멸 파이썬.ver
 ## 스위치 사용한 LED 점멸 테스트 파이썬.ver
 
 SWITCHx1_스위치누름에 따라 프린트문 출력   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0524/sw1.py "4")
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0524/sw1.py "4")
 <br>
 
 SWITCHx2_두 스위치 사용하여 LED 켜고 끄기   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0524/sw2.py "5")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0524/sw2.py "5")
 <br>
 
 SWITCHx1_한 스위치로 LED 켜고 끄기   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0524/sw3.py "6")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0524/sw3.py "6")
 <br>
 <br>
 <br>
@@ -50,11 +50,11 @@ Both : 변화기간의 중간
 <br>
 
 인터럽트를 활용한 내부 풀 다운 스위치   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/int.py "7")
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/int.py "7")
 <br>
 
 인터럽트를 활용한 내부 풀 다운 스위치로 LED 점멸하기   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/int_led.py "8")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/int_led.py "8")
 <br>
 <br>
 <br>
@@ -65,27 +65,27 @@ Both : 변화기간의 중간
 <br>
 
 PWM 기본   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/pwm1.py "9")
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/pwm1.py "9")
 <br>
 
 PWM 활용 LED의 느린 점멸   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/pwm_led.py "10")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/pwm_led.py "10")
 <br>
 
 PWM 활용 LED의 빠른 점멸   
-[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/pwm_led2.py "11")
+[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/pwm_led2.py "11")
 <br>
 
 PWM 활용 스피커를 통한 멜로디 출력   
-[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/melody.py "12")
+[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/melody.py "12")
 <br>
 
 PWM 활용 키보드 피아노.ver1(입력후 엔터)   
-[test_code_5](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/piano.py "13")
+[test_code_5](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/piano.py "13")
 <br>
 
 PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)   
-[test_code_6](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0525/piano2.py "14")
+[test_code_6](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0525/piano2.py "14")
 <br>
 <br>
 <br>
@@ -99,7 +99,7 @@ PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)
   신호는 low -> high로 변화되어 에코로 수신됨   
 
 초음파센서 활용한 차량 후방 감지 알림장치   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/ultrasonic01.py "15")
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/ultrasonic01.py "15")
 <br>
 <br>
 <br>
@@ -107,21 +107,21 @@ PWM 활용 키보드 피아노.ver2(입력시 바로 사운드 출력)
 ## Flask라이브러리 활용한 웹제어 LED 파이썬.ver
 
 Flask로 기본 웹 생성   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/flasktest.py "16")
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/flasktest.py "16")
 <br>
 
 여러페이지 생성   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/flaskprint.py "17")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/flaskprint.py "17")
 <br>
 
 get방식 LED점멸   
-[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/appLedTestGet.py "18")
+[test_code_3](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/appLedTestGet.py "18")
 <br>
 
 get방식+상태입력 LED점멸   
-[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/appLedTestState.py "19")
+[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/appLedTestState.py "19")
 <br>
 
 post방식+버튼입력 LED점멸   
-[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20control/0526/appLedTestButton.py "20")
+[test_code_4](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0526/appLedTestButton.py "20")
 <br>
