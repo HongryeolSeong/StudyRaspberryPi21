@@ -6,7 +6,7 @@ IoT 개발자 과정을 통해 학습한 Sensor Control 실습 내용입니다.
 ## WiringPi 라이브러리 활용한 LED 점멸 테스트
 
 LEDx1_0.5초 간격으로 점멸   
-[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/sensor%20control/0521/gpio_test.c "1")
+[test_code_1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20Control/0521/gpio_test.c "1")
 <br>
 
 LEDx2_0.5초 간격으로 점멸   
