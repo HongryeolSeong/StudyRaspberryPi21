@@ -4,7 +4,7 @@ Raspberry Pi Study Repository
 <br>
 <br>
 
-## WiringPi 라이브러리 활용한 LED 점멸 테스트🎯
+## Sensor Control 🎯
 [Sensor Control 👈 ](https://github.com/HongryeolSeong/StudyRaspberryPi21/tree/main/Sensor%20Control)
 <br/>
 
