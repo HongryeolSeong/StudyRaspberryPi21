@@ -10,7 +10,7 @@ LEDx1_0.5초 간격으로 점멸
 <br>
 
 LEDx2_0.5초 간격으로 점멸   
-[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20control/0521/gpio_test2.c "2")
+[test_code_2](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Sensor%20Control/0521/gpio_test2.c "2")
 <br>
 
 LEDx1_1초 간격으로 점멸 파이썬.ver   
