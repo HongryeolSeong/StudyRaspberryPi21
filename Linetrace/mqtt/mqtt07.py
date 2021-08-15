@@ -297,35 +297,22 @@ def on_message(client, userdata, message):
     # 해당 Topic의 메세지에 대한 동작 수행
     if message == 's':          # 전진
         set_start()
-        # time.sleep(3)
-        # set_position()
-        # set_start()
-        # set_position()
     elif message == 'b':        # 복귀
         set_position()
-        set_start()
-        set_position()
-        set_temp_back()
+        flag = 0
     elif message == 't':        # 정지
         stop()
     elif message == '1':        # 좌회전
         flag = 1
         set_start()
-        flag = 0
     elif message == '2':        # 우회전
         flag = 2
-        set_temp_left()
-        set_temp_forward()
         set_start()
-        flag = 0
     elif message == '3':        # 우회전
         flag = 3
-        set_temp_right()
-        set_temp_forward()
         set_start()
-        flag = 0
     # elif message == '4':        # 우회전
-    #     set_right()
+    #     set_start()
     else: pass
 
 ### mqtt 통신 위한 객체 생성 및 설정
