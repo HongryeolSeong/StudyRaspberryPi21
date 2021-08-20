@@ -219,10 +219,6 @@ def on_message(client, userdata, message):
     # 해당 Topic의 메세지에 대한 동작 수행
     if message == 's':          # 전진
         set_start()
-        # time.sleep(3)
-        # set_position()
-        # set_start()
-        # set_position()
     elif message == 'b':        # 복귀
         set_position()
         set_start()

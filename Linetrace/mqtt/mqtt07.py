@@ -320,7 +320,8 @@ def on_message(client, userdata, message):
     elif message == '3':        # 3번 테이블
         flag = 3
         set_start()
-    # elif message == '4':
+    # elif message == '4':        # 4번 테이블
+    #     flag = 4
     #     set_start()
     else: pass
 
