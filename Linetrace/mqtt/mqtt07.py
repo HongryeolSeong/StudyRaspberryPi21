@@ -138,6 +138,7 @@ def set_right():
     GPIO.output(mpin7, False)
     GPIO.output(mpin8, True)
 
+### 짧은 후진
 def set_temp_back():
     t_end = time.time() + 2
     setOg()
@@ -152,6 +153,7 @@ def set_temp_back():
         GPIO.output(mpin8, True)
     stop()
 	
+### 짧은 전진
 def set_temp_forward():
     setOg()
     while True:
@@ -169,7 +171,7 @@ def set_temp_forward():
             time.sleep(0.00001)
     stop()
 	
-### 좌회전
+### 짧은 좌회전
 def set_temp_left():
     pa.ChangeDutyCycle(h)
     pb.ChangeDutyCycle(h)
@@ -186,7 +188,7 @@ def set_temp_left():
         GPIO.output(mpin7, True)
         GPIO.output(mpin8, False)
 
-### 우회전
+### 짧은 우회전
 def set_temp_right():
     pa.ChangeDutyCycle(h)
     pb.ChangeDutyCycle(h)
@@ -275,14 +277,21 @@ def stop():
 # 		time.sleep(1)
 # 	event_pause.clear()
 
+### 서빙 후 정위치로 세팅
 def set_table_position():
     global flag
+    set_position()
+    set_start()
+
     if flag == 1:
-        pass
+        set_position()
+        set_temp_back()
     elif flag == 2:
-        pass
+        set_temp_forward()
+        set_temp_left()
     elif flag == 3:
-        pass
+        set_temp_forward()
+        set_temp_right()
     elif flag == 4:
         pass
 
@@ -298,20 +307,20 @@ def on_message(client, userdata, message):
     if message == 's':          # 전진
         set_start()
     elif message == 'b':        # 복귀
-        set_position()
+        set_table_position()
         flag = 0
     elif message == 't':        # 정지
         stop()
-    elif message == '1':        # 좌회전
+    elif message == '1':        # 1번 테이블
         flag = 1
         set_start()
-    elif message == '2':        # 우회전
+    elif message == '2':        # 2번 테이블
         flag = 2
         set_start()
-    elif message == '3':        # 우회전
+    elif message == '3':        # 3번 테이블
         flag = 3
         set_start()
-    # elif message == '4':        # 우회전
+    # elif message == '4':
     #     set_start()
     else: pass
 
