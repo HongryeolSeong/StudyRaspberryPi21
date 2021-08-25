@@ -152,11 +152,11 @@ def set_start():
         #         time.sleep(1)
 
         # 초음파 센서로 방해물 감지
-        # distance = ultra()
-        # if distance < 30:
-        #     stop()
-        # elif distance >= 30:
-            if (GPIO.input(pin) == False) and (GPIO.input(pin2) == False):    # 근접센서1 on, 근접센서2 on
+        distance = ultra()
+        if distance < 30:
+            stop()
+        elif distance >= 30:
+            if (GPIO.input(pin) == False) and (GPIO.input(pin2) == False):      # 근접센서1 on, 근접센서2 on
                 #print("no path")
                 stop()                                                          # RC카 멈춘 후
                 break                                                           # 라인트레이스 구동 종료
