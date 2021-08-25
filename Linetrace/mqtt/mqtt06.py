@@ -152,10 +152,10 @@ def set_start():
         #         time.sleep(1)
 
         # 초음파 센서로 방해물 감지
-        distance = ultra()
-        if distance < 30:
-            stop()
-        elif distance >= 30:
+        # distance = ultra()
+        # if distance < 30:
+        #     stop()
+        # elif distance >= 30:
             if (GPIO.input(pin) == False) and (GPIO.input(pin2) == False):    # 근접센서1 on, 근접센서2 on
                 #print("no path")
                 stop()                                                          # RC카 멈춘 후
@@ -235,7 +235,7 @@ def on_message(client, userdata, message):
     else: pass
 
 ### mqtt 통신 위한 객체 생성 및 설정
-broker_address='210.119.12.93'  # broker address
+broker_address='210.119.12.92'  # broker address
 pub_topic = 'MOTOR/TEST/'       # topic
 print("creating new instance")
 client=mqtt.Client("P1")        # create new instance

@@ -140,7 +140,7 @@ def set_right():
 
 ### 짧은 후진
 def set_temp_back():
-    t_end = time.time() + 2
+    t_end = time.time() + 1.5
     setOg()
     while time.time() < t_end:
         GPIO.output(mpin1, True)                                       # 전진 운전
@@ -152,9 +152,26 @@ def set_temp_back():
         GPIO.output(mpin7, False)
         GPIO.output(mpin8, True)
     stop()
+
+### 짧은 전진1
+def set_temp_forward1():
+    pa.ChangeDutyCycle(h)
+    pb.ChangeDutyCycle(h)
+    pc.ChangeDutyCycle(h)
+    pd.ChangeDutyCycle(h)
+    t_end = time.time() + 0.7
+    while time.time() < t_end:
+        GPIO.output(mpin1, False)                                       # 전진 운전
+        GPIO.output(mpin2, True)
+        GPIO.output(mpin3, False)
+        GPIO.output(mpin4, True)
+        GPIO.output(mpin5, False)
+        GPIO.output(mpin6, True)
+        GPIO.output(mpin7, True)
+        GPIO.output(mpin8, False)
 	
-### 짧은 전진
-def set_temp_forward():
+### 짧은 전진2
+def set_temp_forward2():
     setOg()
     while True:
         if (GPIO.input(pin) == True) and (GPIO.input(pin2) == True):
@@ -168,7 +185,7 @@ def set_temp_forward():
             GPIO.output(mpin6, True)
             GPIO.output(mpin7, True)
             GPIO.output(mpin8, False)
-            time.sleep(0.00001)
+            time.sleep(sec)
     stop()
 	
 ### 짧은 좌회전
@@ -187,6 +204,7 @@ def set_temp_left():
         GPIO.output(mpin6, False)
         GPIO.output(mpin7, True)
         GPIO.output(mpin8, False)
+    stop()
 
 ### 짧은 우회전
 def set_temp_right():
@@ -194,7 +212,7 @@ def set_temp_right():
     pb.ChangeDutyCycle(h)
     pc.ChangeDutyCycle(h)
     pd.ChangeDutyCycle(h)
-    t_end = time.time() + 0.8
+    t_end = time.time() + 1
     while time.time() < t_end:
         GPIO.output(mpin1, False)    # 우회전시 a와 c는 정방향 회전, b와 d는 역방향 회전
         GPIO.output(mpin2, True)
@@ -204,6 +222,7 @@ def set_temp_right():
         GPIO.output(mpin6, True)
         GPIO.output(mpin7, False)
         GPIO.output(mpin8, True)
+    stop()
 
 ### 라인트레이스를 통한 전진/좌회전/우회전
 def set_start():
@@ -249,13 +268,23 @@ def set_start():
             time.sleep(sec)
         
 ### 경로가 끝난 지점에서 다시 운전하기 위해 180도 회전
-def set_position():
+def set_position2():
     while True:
         if (GPIO.input(pin) == True) and (GPIO.input(pin2) == True):        # 핀이 둘 다 off일 시 = 경로에 위치할 시
             break                                                           # 제자리 좌회전 종료
         elif (GPIO.input(pin) == False) or (GPIO.input(pin2) == False):     # 핀이 둘 중 하나라도 on일 시
             set_left()                                                      # 제자리 좌회전 운전
             time.sleep(0.001)
+    stop()
+
+def set_position():
+    pa.ChangeDutyCycle(h)
+    pb.ChangeDutyCycle(h)
+    pc.ChangeDutyCycle(h)
+    pd.ChangeDutyCycle(h)
+    t_end = time.time() + 1.5
+    while time.time() < t_end:
+        set_left()
     stop()
 
 ### 정지
@@ -280,17 +309,17 @@ def stop():
 ### 서빙 후 정위치로 세팅
 def set_table_position():
     global flag
-    set_position()
+    set_position2()
     set_start()
 
     if flag == 1:
         set_position()
         set_temp_back()
     elif flag == 2:
-        set_temp_forward()
+        set_temp_forward1()
         set_temp_left()
     elif flag == 3:
-        set_temp_forward()
+        set_temp_forward1()
         set_temp_right()
     elif flag == 4:
         pass
@@ -306,19 +335,28 @@ def on_message(client, userdata, message):
     # 해당 Topic의 메세지에 대한 동작 수행
     if message == 's':          # 전진
         set_start()
-    elif message == 'b':        # 복귀
+    elif message == 'B':        # 복귀
+        #set_position()
         set_table_position()
         flag = 0
-    elif message == 't':        # 정지
+    elif message == 'S':        # 정지
         stop()
     elif message == '1':        # 1번 테이블
         flag = 1
+        set_temp_forward2()
+        time.sleep(0.2)
         set_start()
     elif message == '2':        # 2번 테이블
         flag = 2
+        set_temp_left()
+        set_temp_forward2()
+        time.sleep(0.2)
         set_start()
     elif message == '3':        # 3번 테이블
         flag = 3
+        set_temp_right()
+        set_temp_forward2()
+        time.sleep(0.2)
         set_start()
     # elif message == '4':        # 4번 테이블
     #     flag = 4
