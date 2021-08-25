@@ -50,15 +50,15 @@ IoT 개발자 과정을 마무리하며 진행한 팀프로젝트에서 맡은 �
 <br/>
 
 ###### 1번 테이블 서빙
-![first](https://github.com/jacksimuse/Project_EATS/blob/hongryeol/ServingRobot/refimg/1table.gif)
+![first](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/1t.gif)
 <br/>
 
 ###### 2번 테이블 서빙
-![second](https://github.com/jacksimuse/Project_EATS/blob/hongryeol/ServingRobot/refimg/2table.gif)
+![second](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/2t.gif)
 <br/>
 
 ###### 3번 테이블 서빙
-![third](https://github.com/jacksimuse/Project_EATS/blob/hongryeol/ServingRobot/refimg/3table.gif)
+![third](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/3t.gif)
 <br/>
 <br/>
 <br/>
