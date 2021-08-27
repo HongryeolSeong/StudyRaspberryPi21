@@ -61,5 +61,22 @@ IoT 개발자 과정을 마무리하며 진행한 팀프로젝트에서 맡은 �
 ![third](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/3t.gif)
 <br/>
 <br/>
+
+#### 프로젝트 전체 시나리오[.mp4 👈](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/05_%EC%B5%9C%EC%A2%85.mp4)
+---
+##### 1. 손님이 주문 키오스크를 통해 주문
+![step1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/last01.gif)
+<br/>
+
+##### 2. 점주는 주방 시스템을 통해 주문 확인 및 서빙 보내기
+![step1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/last02.gif)
+<br/>
+
+##### 3. 서빙 로봇은 입력받은 테이블로 서빙 시작
+![step1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/last03.gif)
+<br/>
+
+##### 4. 서빙 로봇은 서빙 완료시 주방으로 복귀
+![step1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/last04.gif)
 <br/>
 
