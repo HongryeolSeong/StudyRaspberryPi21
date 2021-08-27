@@ -62,7 +62,7 @@ IoT 개발자 과정을 마무리하며 진행한 팀프로젝트에서 맡은 �
 <br/>
 <br/>
 
-#### 프로젝트 전체 시나리오[.mp4 👈](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/05_%EC%B5%9C%EC%A2%85.mp4)
+#### 전체 프로젝트 결과[.mp4 👈](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/05_%EC%B5%9C%EC%A2%85.mp4)
 ---
 ##### 1. 손님이 주문 키오스크를 통해 주문
 ![step1](https://github.com/HongryeolSeong/StudyRaspberryPi21/blob/main/Linetrace/refimg/last01.gif)
